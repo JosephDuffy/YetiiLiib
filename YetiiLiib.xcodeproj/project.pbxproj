@@ -10,6 +10,16 @@
 		D921117B1C15D10A003DB330 /* YetiiLiib.h in Headers */ = {isa = PBXBuildFile; fileRef = D921117A1C15D10A003DB330 /* YetiiLiib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D92111821C15D10A003DB330 /* YetiiLiib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92111771C15D10A003DB330 /* YetiiLiib.framework */; };
 		D92111871C15D10A003DB330 /* YetiiLiibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111861C15D10A003DB330 /* YetiiLiibTests.swift */; };
+		D92111941C15D159003DB330 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111921C15D159003DB330 /* AboutViewController.swift */; };
+		D92111971C15D17B003DB330 /* AboutTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */; };
+		D921119A1C15D1D1003DB330 /* TwitterUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */; };
+		D921119C1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */; };
+		D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */; };
+		D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */; };
+		D92111A31C15D2B4003DB330 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A21C15D2B4003DB330 /* Utilities.swift */; };
+		D92111A51C15D61D003DB330 /* AboutScreenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A41C15D61D003DB330 /* AboutScreenUser.swift */; };
+		D92111BD1C15FFD8003DB330 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */; };
+		D92111BF1C16013E003DB330 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D92111BE1C16013E003DB330 /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +39,16 @@
 		D92111811C15D10A003DB330 /* YetiiLiibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YetiiLiibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D92111861C15D10A003DB330 /* YetiiLiibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YetiiLiibTests.swift; sourceTree = "<group>"; };
 		D92111881C15D10A003DB330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D92111921C15D159003DB330 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewHeaderView.swift; sourceTree = "<group>"; };
+		D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterUserTableViewCell.swift; sourceTree = "<group>"; };
+		D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleAndRightDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
+		D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		D92111A21C15D2B4003DB330 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D92111A41C15D61D003DB330 /* AboutScreenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScreenUser.swift; sourceTree = "<group>"; };
+		D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		D92111BE1C16013E003DB330 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +91,13 @@
 		D92111791C15D10A003DB330 /* YetiiLiib */ = {
 			isa = PBXGroup;
 			children = (
+				D921119F1C15D245003DB330 /* Extensions */,
+				D92111981C15D1B8003DB330 /* Custom Cells */,
+				D92111911C15D11F003DB330 /* About Screen */,
 				D921117A1C15D10A003DB330 /* YetiiLiib.h */,
 				D921117C1C15D10A003DB330 /* Info.plist */,
+				D92111A21C15D2B4003DB330 /* Utilities.swift */,
+				D92111BE1C16013E003DB330 /* Media.xcassets */,
 			);
 			path = YetiiLiib;
 			sourceTree = "<group>";
@@ -84,6 +109,35 @@
 				D92111881C15D10A003DB330 /* Info.plist */,
 			);
 			path = YetiiLiibTests;
+			sourceTree = "<group>";
+		};
+		D92111911C15D11F003DB330 /* About Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D92111921C15D159003DB330 /* AboutViewController.swift */,
+				D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */,
+				D92111A41C15D61D003DB330 /* AboutScreenUser.swift */,
+			);
+			name = "About Screen";
+			sourceTree = "<group>";
+		};
+		D92111981C15D1B8003DB330 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */,
+				D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */,
+				D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		D921119F1C15D245003DB330 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */,
+				D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92111BF1C16013E003DB330 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +249,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */,
+				D921119A1C15D1D1003DB330 /* TwitterUserTableViewCell.swift in Sources */,
+				D92111A31C15D2B4003DB330 /* Utilities.swift in Sources */,
+				D92111941C15D159003DB330 /* AboutViewController.swift in Sources */,
+				D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */,
+				D92111971C15D17B003DB330 /* AboutTableViewHeaderView.swift in Sources */,
+				D92111BD1C15FFD8003DB330 /* UIImage+Extensions.swift in Sources */,
+				D92111A51C15D61D003DB330 /* AboutScreenUser.swift in Sources */,
+				D921119C1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -295,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -308,28 +372,33 @@
 		D921118C1C15D10A003DB330 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D921118D1C15D10A003DB330 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
