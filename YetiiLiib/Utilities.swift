@@ -35,6 +35,10 @@ public class Utilities {
         return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
     }
 
+    public static func getAppBundleId(bundle: NSBundle = Utilities.applicationBundle) -> String? {
+        return bundle.bundleIdentifier
+    }
+
     public static func getAboutScreenAppIconImage(bundle: NSBundle = Utilities.applicationBundle) -> UIImage? {
         if appIconImage == nil {
             appIconImage = UIImage(named: "App Icon 128pt", inBundle: bundle, compatibleWithTraitCollection: nil)

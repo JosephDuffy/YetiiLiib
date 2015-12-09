@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D920E4D01C17987E005BA928 /* OtherAppsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */; };
+		D920E4D21C1798E5005BA928 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D920E4D11C1798E5005BA928 /* Alamofire.framework */; };
+		D920E4D41C179D6B005BA928 /* AppMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4D31C179D6B005BA928 /* AppMetaData.swift */; };
+		D920E4D61C17A262005BA928 /* RightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4D51C17A262005BA928 /* RightDetailTableViewCell.swift */; };
 		D921117B1C15D10A003DB330 /* YetiiLiib.h in Headers */ = {isa = PBXBuildFile; fileRef = D921117A1C15D10A003DB330 /* YetiiLiib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D92111821C15D10A003DB330 /* YetiiLiib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92111771C15D10A003DB330 /* YetiiLiib.framework */; };
 		D92111871C15D10A003DB330 /* YetiiLiibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111861C15D10A003DB330 /* YetiiLiibTests.swift */; };
@@ -33,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherAppsTableViewController.swift; sourceTree = "<group>"; };
+		D920E4D11C1798E5005BA928 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D920E4D31C179D6B005BA928 /* AppMetaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMetaData.swift; sourceTree = "<group>"; };
+		D920E4D51C17A262005BA928 /* RightDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D92111771C15D10A003DB330 /* YetiiLiib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YetiiLiib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D921117A1C15D10A003DB330 /* YetiiLiib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YetiiLiib.h; sourceTree = "<group>"; };
 		D921117C1C15D10A003DB330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D920E4D21C1798E5005BA928 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +79,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D920E4CB1C1797E7005BA928 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D920E4D11C1798E5005BA928 /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D920E4CE1C179850005BA928 /* Other Apps Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */,
+				D920E4D31C179D6B005BA928 /* AppMetaData.swift */,
+			);
+			name = "Other Apps Screen";
+			sourceTree = "<group>";
+		};
 		D921116D1C15D10A003DB330 = {
 			isa = PBXGroup;
 			children = (
 				D92111791C15D10A003DB330 /* YetiiLiib */,
 				D92111851C15D10A003DB330 /* YetiiLiibTests */,
 				D92111781C15D10A003DB330 /* Products */,
+				D920E4CB1C1797E7005BA928 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +121,7 @@
 				D921119F1C15D245003DB330 /* Extensions */,
 				D92111981C15D1B8003DB330 /* Custom Cells */,
 				D92111911C15D11F003DB330 /* About Screen */,
+				D920E4CE1C179850005BA928 /* Other Apps Screen */,
 				D921117A1C15D10A003DB330 /* YetiiLiib.h */,
 				D921117C1C15D10A003DB330 /* Info.plist */,
 				D92111A21C15D2B4003DB330 /* Utilities.swift */,
@@ -127,6 +155,7 @@
 				D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */,
 				D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */,
 				D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */,
+				D920E4D51C17A262005BA928 /* RightDetailTableViewCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -158,8 +187,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D921118B1C15D10A003DB330 /* Build configuration list for PBXNativeTarget "YetiiLiib" */;
 			buildPhases = (
-				D92111721C15D10A003DB330 /* Sources */,
 				D92111731C15D10A003DB330 /* Frameworks */,
+				D92111721C15D10A003DB330 /* Sources */,
 				D92111741C15D10A003DB330 /* Headers */,
 				D92111751C15D10A003DB330 /* Resources */,
 			);
@@ -249,12 +278,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D920E4D01C17987E005BA928 /* OtherAppsTableViewController.swift in Sources */,
+				D920E4D61C17A262005BA928 /* RightDetailTableViewCell.swift in Sources */,
 				D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */,
 				D921119A1C15D1D1003DB330 /* TwitterUserTableViewCell.swift in Sources */,
 				D92111A31C15D2B4003DB330 /* Utilities.swift in Sources */,
 				D92111941C15D159003DB330 /* AboutViewController.swift in Sources */,
 				D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */,
 				D92111971C15D17B003DB330 /* AboutTableViewHeaderView.swift in Sources */,
+				D920E4D41C179D6B005BA928 /* AppMetaData.swift in Sources */,
 				D92111BD1C15FFD8003DB330 /* UIImage+Extensions.swift in Sources */,
 				D92111A51C15D61D003DB330 /* AboutScreenUser.swift in Sources */,
 				D921119C1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift in Sources */,
@@ -377,6 +409,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -396,6 +429,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -445,6 +479,7 @@
 				D921118D1C15D10A003DB330 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D921118E1C15D10A003DB330 /* Build configuration list for PBXNativeTarget "YetiiLiibTests" */ = {
 			isa = XCConfigurationList;
@@ -453,6 +488,7 @@
 				D92111901C15D10A003DB330 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
