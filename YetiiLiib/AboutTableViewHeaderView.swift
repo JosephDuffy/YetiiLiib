@@ -22,11 +22,7 @@ class AboutTableViewHeaderView: UIView {
 
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         if let image = Utilities.getAboutScreenAppIconImage() {
-            if let imageMask = UIImage(named: "iOS 7 Icon Mask", inBundle: Utilities.framworkBundle, compatibleWithTraitCollection: nil) {
-                self.imageView.image = image.imageAfterApplyingMask(imageMask)
-            } else {
-                print("Failed to get icon mask from bundle: \(Utilities.framworkBundle)")
-            }
+            self.imageView.image = image.imageAfterApplyingAppIconMask()
         } else {
             print("Failed to get app icon image")
         }

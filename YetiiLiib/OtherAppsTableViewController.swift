@@ -16,58 +16,97 @@ public class OtherAppsTableViewController: UITableViewController {
     public private(set) var errorLoadingApps = false
     public var companyName: String?
 
+    /**
+     The id of the developer to get the app information for. If `nil` no app information
+     will be downloaded, but the `appMetaDatas` propertly will still be used
+     To find your developer id visit: https://itunes.apple.com/search?term=yetii%20ltd&entity=software
+     but replace "yetii%20ltd" with your own developer name and look for the "artistId" property.
+     Examples:
+      - Yetii Ltd.: 929726747
+      - Apple: 284417353
+    */
+    public var developerId: Int?
+
+    /**
+     The campaign provider id (pt) to append to the app store URL. See
+     https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns for
+     more information.
+    */
+    public var campaignProviderId: Int?
+
+    /**
+     The campaign token (ct) to append to the app store URL. See
+     https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns for
+     more information.
+     */
+    public var campaignToken: String?
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "More Apps"
 
-        self.tableView.registerClass(RightDetailTableViewCell.self, forCellReuseIdentifier: "AppMetaDataCell")
+        self.tableView.estimatedRowHeight = 43.5
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.registerNib(UINib(nibName: "AppInformationTableViewCell", bundle: Utilities.framworkBundle), forCellReuseIdentifier: "AppInformationCell")
 
-        Alamofire.request(.GET, "https://itunes.apple.com/lookup?id=929726747&entity=software")
-            .responseJSON { response in
-                switch response.result {
-                case .Success(let JSON):
-                    if let JSON = JSON as? [String : AnyObject] {
-                        print("Loaded JSON")
-                        if let resultsCount = JSON["resultCount"] as? Int, results = JSON["results"] as? [[String : AnyObject]] {
-                            print("Got \(resultsCount) result(s)")
-                            if resultsCount > 0 && self.companyName == nil {
-                                self.companyName = results[0]["artistName"] as? String
-                            }
+        if let developerId = self.developerId {
+            // Get the current device's country code to ensure the correct currency is displayed for prices
+            let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String ?? "us"
 
-                            if resultsCount > 1 {
-                                for i in 1..<resultsCount {
-                                    let appInformation = results[i]
+            var queryParams: [String : AnyObject] = [
+                "id": developerId,
+                "entity": "software",
+                "country": countryCode,
+                "mt": 8 // 8 = iOS apps, 12 = Mac apps
+            ]
 
-                                    print(appInformation["trackId"])
-                                    print(appInformation["trackName"])
-                                    print(appInformation["formattedPrice"])
-                                    print(appInformation["artworkUrl60"])
+            if let campaignProviderId = self.campaignProviderId {
+                queryParams["pt"] = campaignProviderId
+            }
 
-                                    guard let appMetaData = AppMetaData(rawInformation: appInformation) else { break }
+            if let campaignToken = self.campaignToken {
+                queryParams["ct"] = campaignToken
+            }
 
-                                    // Don't include the current app
-                                    guard appMetaData.bundleId != Utilities.getAppBundleId() else { break }
+            Alamofire.request(.GET, "https://itunes.apple.com/lookup", parameters: queryParams)
+                .responseJSON { response in
+                    switch response.result {
+                    case .Success(let JSON):
+                        if let JSON = JSON as? [String : AnyObject] {
+                            if let resultsCount = JSON["resultCount"] as? Int, results = JSON["results"] as? [[String : AnyObject]] {
+                                if resultsCount > 0 && self.companyName == nil {
+                                    self.companyName = results[0]["artistName"] as? String
+                                }
 
-                                    print(appMetaData)
-                                    self.appMetaDatas.append(appMetaData)
+                                if resultsCount > 1 {
+                                    for i in 1..<resultsCount {
+                                        let appInformation = results[i]
+
+                                        guard let appMetaData = AppMetaData(rawInformation: appInformation) else { break }
+
+                                        // Don't include the current app
+                                        guard appMetaData.bundleId != Utilities.getAppBundleId() else { break }
+
+                                        self.appMetaDatas.append(appMetaData)
+                                    }
                                 }
                             }
+                        } else {
+                            print("Invalid JSON")
                         }
-                    } else {
-                        print("Invalid JSON")
+
+                        self.hasLoadedApps = true
+                        self.errorLoadingApps = false
+                        self.tableView.reloadData()
+                    case .Failure(let error):
+                        print("Request failed with error: \(error)")
+
+                        self.hasLoadedApps = true
+                        self.errorLoadingApps = true
+                        self.tableView.reloadData()
                     }
-
-                    self.hasLoadedApps = true
-                    self.errorLoadingApps = false
-                    self.tableView.reloadData()
-                case .Failure(let error):
-                    print("Request failed with error: \(error)")
-
-                    self.hasLoadedApps = true
-                    self.errorLoadingApps = true
-                    self.tableView.reloadData()
-                }
+            }
         }
     }
 
@@ -124,19 +163,10 @@ public class OtherAppsTableViewController: UITableViewController {
     }
 
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AppMetaDataCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("AppInformationCell", forIndexPath: indexPath) as! AppInformationTableViewCell
 
-        let appMetaData = self.appMetaDatas[indexPath.row]
-
-        cell.textLabel?.text = appMetaData.name
-        cell.detailTextLabel?.text = appMetaData.formattedPrice
-
-        if let imageView = cell.imageView where imageView.image == nil {
-            appMetaData.imageForSize(imageView.frame.size, callback: { (image) -> Void in
-                imageView.image = image
-                // Cause the image to actually be shown
-                cell.setNeedsLayout()
-            })
+        if cell.appMetaData == nil {
+            cell.appMetaData = self.appMetaDatas[indexPath.row]
         }
 
         return cell
@@ -147,6 +177,8 @@ public class OtherAppsTableViewController: UITableViewController {
         if let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(appMetaData.appId)") {
             UIApplication.sharedApplication().openURL(url)
         }
+
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }

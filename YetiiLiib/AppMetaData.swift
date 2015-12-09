@@ -18,6 +18,9 @@ public struct AppMetaData {
     public let artworkURL512: NSURL
 
     public init?(rawInformation: [String : AnyObject]) {
+        // Mac apps don't return the "supportedDevices" field and can be filtered as such
+        guard rawInformation["supportedDevices"] != nil else { return nil }
+        // Ensure basic required information is available
         guard let appId = rawInformation["trackId"] as? Int else { return nil }
         guard let bundleId = rawInformation["bundleId"] as? String else { return nil }
         guard let name = rawInformation["trackName"] as? String else { return nil }
@@ -38,7 +41,7 @@ public struct AppMetaData {
         self.artworkURL512 = artworkURL512
     }
 
-    public func imageForSize(size: CGSize, scale: CGFloat = UIScreen.mainScreen().scale, callback: (UIImage?) -> Void) {
+    public func imageForSize(size: CGSize, applyIconRounding: Bool = true, scale: CGFloat = UIScreen.mainScreen().scale, callback: (UIImage?) -> Void) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let minWidth = size.width * scale
             let minHeight = size.height * scale
@@ -55,8 +58,16 @@ public struct AppMetaData {
             }()
 
             if let data = NSData(contentsOfURL: url), image = UIImage(data: data) {
+                let imageToReturn: UIImage?
+
+                if applyIconRounding {
+                    imageToReturn = image.imageAfterApplyingAppIconMask()
+                } else {
+                    imageToReturn = image
+                }
+
                 dispatch_async(dispatch_get_main_queue()) {
-                    callback(image)
+                    callback(imageToReturn)
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
