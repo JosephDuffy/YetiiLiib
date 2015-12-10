@@ -54,22 +54,11 @@ public class OtherAppsTableViewController: UITableViewController {
             // Get the current device's country code to ensure the correct currency is displayed for prices
             let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String ?? "us"
 
-            var queryParams: [String : AnyObject] = [
+            Alamofire.request(.GET, "https://itunes.apple.com/lookup", parameters: [
                 "id": developerId,
                 "entity": "software",
-                "country": countryCode,
-                "mt": 8 // 8 = iOS apps, 12 = Mac apps
-            ]
-
-            if let campaignProviderId = self.campaignProviderId {
-                queryParams["pt"] = campaignProviderId
-            }
-
-            if let campaignToken = self.campaignToken {
-                queryParams["ct"] = campaignToken
-            }
-
-            Alamofire.request(.GET, "https://itunes.apple.com/lookup", parameters: queryParams)
+                "country": countryCode
+                ])
                 .responseJSON { response in
                     switch response.result {
                     case .Success(let JSON):
@@ -174,7 +163,18 @@ public class OtherAppsTableViewController: UITableViewController {
 
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let appMetaData = self.appMetaDatas[indexPath.row]
-        if let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(appMetaData.appId)") {
+
+        var url = "itms-apps://itunes.apple.com/app/id\(appMetaData.appId)&mt=8"
+
+        if let campaignProviderId = self.campaignProviderId {
+            url += "&pt=\(campaignProviderId)"
+        }
+
+        if let campaignToken = self.campaignToken {
+            url += "&ct=\(campaignToken)"
+        }
+
+        if let url = NSURL(string: url) {
             UIApplication.sharedApplication().openURL(url)
         }
 
