@@ -28,18 +28,26 @@ public class OtherAppsTableViewController: UITableViewController {
     public var developerId: Int?
 
     /**
-     The campaign provider id (pt) to append to the app store URL. See
-     https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns for
-     more information.
+     The campaign provider id (pt) to append to the app store URL
+     
+     - SeeAlso: [https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns](https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns)
     */
     public var campaignProviderId: Int?
 
     /**
-     The campaign token (ct) to append to the app store URL. See
-     https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns for
-     more information.
+     The campaign token (ct) to append to the app store URL
+     - SeeAlso: [https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns](https://itunespartner.apple.com/en/apps/faq/App%20Analytics_Campaigns)
      */
     public var campaignToken: String?
+
+    /**
+     The country code to use when querying the App Store for the the app data. Using the
+     device's country code ensures the correct currency and value is displayed for app prices.
+     Defaults to "us" if the code cannot be loaded from NSLocale
+     */
+    public var countryCode: String = {
+        return NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String ?? "us"
+    }()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +59,10 @@ public class OtherAppsTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: "AppInformationTableViewCell", bundle: Utilities.framworkBundle), forCellReuseIdentifier: "AppInformationCell")
 
         if let developerId = self.developerId {
-            // Get the current device's country code to ensure the correct currency is displayed for prices
-            let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String ?? "us"
-
             Alamofire.request(.GET, "https://itunes.apple.com/lookup", parameters: [
                 "id": developerId,
                 "entity": "software",
-                "country": countryCode
+                "country": self.countryCode
                 ])
                 .responseJSON { response in
                     switch response.result {
@@ -164,18 +169,13 @@ public class OtherAppsTableViewController: UITableViewController {
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let appMetaData = self.appMetaDatas[indexPath.row]
 
-        var url = "itms-apps://itunes.apple.com/app/id\(appMetaData.appId)&mt=8"
-
-        if let campaignProviderId = self.campaignProviderId {
-            url += "&pt=\(campaignProviderId)"
-        }
-
-        if let campaignToken = self.campaignToken {
-            url += "&ct=\(campaignToken)"
-        }
-
-        if let url = NSURL(string: url) {
+        do {
+            let url = try appMetaData.appStoreURL(campaignProviderId: self.campaignProviderId, campaignToken: self.campaignToken)
             UIApplication.sharedApplication().openURL(url)
+        } catch let error as URLGenerationError {
+            print(error)
+        } catch {
+            print("Unknown error generating application URL")
         }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
