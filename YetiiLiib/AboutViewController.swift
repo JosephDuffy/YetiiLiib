@@ -30,6 +30,11 @@ public class AboutViewController: UITableViewController {
         self.specialThanksPeople = specialThanksPeople
     }
 
+    // Required for iOS 7
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

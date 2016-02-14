@@ -35,13 +35,11 @@ public class Utilities {
                 return nil
             }
         } else {
-            guard let imagePath = bundle.pathForResource(imageName, ofType: "pdf") else {
-                print("Failed to get path for \(imageName)")
-                return nil
-            }
-
-            guard let image = UIImage(contentsOfFile: imagePath) else {
-                print("Failed to create UIImage from content of \(imageName) file at path: \(imagePath)")
+            // The bundle is ignored on iOS 7 because YetiiLiib can only be included
+            // directly (e.g., with CocoaSeeds), so looking for the image in the
+            // main bundle is the only option
+            guard let image = UIImage(named: imageName) else {
+                print("Failed to create UIImage named \(imageName)")
                 return nil
             }
 
