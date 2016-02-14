@@ -196,4 +196,16 @@ public class OtherAppsTableViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
+    public override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if #available(iOS 8, *) {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(AppInformationTableViewCell.reuseIdentifier()) as! AppInformationTableViewCell
+            cell.appMetaData = self.appMetaDatas[indexPath.row]
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
+            return cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height + 1
+        }
+    }
+
 }

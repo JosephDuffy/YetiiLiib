@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10109" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="0.0" id="KGk-i7-Jjw" customClass="AppInformationTableViewCell" customModule="YetiiLiib" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="0.0" id="KGk-i7-Jjw" customClass="AppInformationTableViewCell" customModule="Gathered" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -37,17 +38,16 @@
                     </activityIndicatorView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4nA-mM-hea" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="3tY-d8-yUP"/>
-                    <constraint firstItem="8dP-fD-pkG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="E5b-Bs-6v3"/>
-                    <constraint firstAttribute="bottom" secondItem="8dP-fD-pkG" secondAttribute="bottom" constant="11" id="MX4-zR-F1S"/>
+                    <constraint firstAttribute="top" secondItem="4nA-mM-hea" secondAttribute="top" constant="-12" id="3tY-d8-yUP"/>
                     <constraint firstItem="FEy-W6-1ah" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RVz-HI-hRy"/>
                     <constraint firstItem="4nA-mM-hea" firstAttribute="leading" secondItem="FEy-W6-1ah" secondAttribute="trailing" constant="8" symbolic="YES" id="XFF-cx-buC"/>
+                    <constraint firstItem="8dP-fD-pkG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZpH-Hf-EaI"/>
                     <constraint firstItem="8dP-fD-pkG" firstAttribute="leading" secondItem="4nA-mM-hea" secondAttribute="trailing" constant="8" symbolic="YES" id="din-F8-BfJ"/>
                     <constraint firstAttribute="trailing" secondItem="8dP-fD-pkG" secondAttribute="trailing" constant="16" id="jbf-PC-I4N"/>
                     <constraint firstItem="w6H-oJ-QzN" firstAttribute="centerY" secondItem="FEy-W6-1ah" secondAttribute="centerY" id="mTW-nF-W1I"/>
                     <constraint firstItem="w6H-oJ-QzN" firstAttribute="centerX" secondItem="FEy-W6-1ah" secondAttribute="centerX" id="rFy-q3-vbp"/>
                     <constraint firstAttribute="bottom" secondItem="4nA-mM-hea" secondAttribute="bottom" constant="11" id="s6l-4U-ikw"/>
-                    <constraint firstItem="FEy-W6-1ah" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xs2-EQ-OyC"/>
+                    <constraint firstAttribute="leading" secondItem="FEy-W6-1ah" secondAttribute="leading" constant="-16" id="xs2-EQ-OyC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
