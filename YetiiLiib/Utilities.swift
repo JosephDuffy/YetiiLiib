@@ -6,11 +6,11 @@
 //  Copyright © 2015 Yetii Ltd. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class Utilities {
     public static var applicationBundle: NSBundle = NSBundle.mainBundle()
-    public static var framworkBundle: NSBundle = NSBundle(forClass: Utilities.self)
+    public static var assetsBundle: NSBundle = NSBundle(forClass: Utilities.self)
     public static var appIconImage: UIImage?
 
     public static func getAppName(bundle: NSBundle = Utilities.applicationBundle) -> String {
@@ -27,6 +27,28 @@ public class Utilities {
         return "Yetii App"
     }
 
+    internal static func image(imageName imageName: String, inBundle bundle: NSBundle = Utilities.applicationBundle) -> UIImage? {
+        if #available(iOS 8.0, *) {
+            if let image = UIImage(named: imageName, inBundle: bundle, compatibleWithTraitCollection: nil) {
+                return image
+            } else {
+                return nil
+            }
+        } else {
+            guard let imagePath = bundle.pathForResource(imageName, ofType: "pdf") else {
+                print("Failed to get path for \(imageName)")
+                return nil
+            }
+
+            guard let image = UIImage(contentsOfFile: imagePath) else {
+                print("Failed to create UIImage from content of \(imageName) file at path: \(imagePath)")
+                return nil
+            }
+
+            return image
+        }
+    }
+
     public static func getAppVersion(bundle: NSBundle = Utilities.applicationBundle) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
@@ -41,7 +63,7 @@ public class Utilities {
 
     public static func getAboutScreenAppIconImage(bundle: NSBundle = Utilities.applicationBundle) -> UIImage? {
         if appIconImage == nil {
-            appIconImage = UIImage(named: "App Icon 128pt", inBundle: bundle, compatibleWithTraitCollection: nil)
+            appIconImage = Utilities.image(imageName: "App Icon 128pt", inBundle: bundle)
         }
 
         return appIconImage

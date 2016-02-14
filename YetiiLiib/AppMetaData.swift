@@ -6,7 +6,7 @@
 //  Copyright © 2015 Yetii Ltd. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct AppMetaData {
     public let appId: Int

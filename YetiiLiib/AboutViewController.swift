@@ -140,8 +140,13 @@ public class AboutViewController: UITableViewController {
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let twitterCell = self.tableView.cellForRowAtIndexPath(indexPath) as? TwitterUserTableViewCell {
-            let alertController = twitterCell.alertController
-            self.presentViewController(alertController, animated: true, completion: nil)
+            if #available(iOS 8.0, *) {
+                let alertController = twitterCell.alertController
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let actionSheet = twitterCell.actionSheet
+                actionSheet.showInView(self.view)
+            }
         }
     }
     

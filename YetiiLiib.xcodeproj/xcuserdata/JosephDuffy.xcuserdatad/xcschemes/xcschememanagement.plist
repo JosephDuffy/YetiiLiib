@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>YetiiLiib iOS 7.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>YetiiLiib.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>D92111801C15D10A003DB330</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D97491B81C70A9BE007700FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D97491C11C70A9BE007700FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

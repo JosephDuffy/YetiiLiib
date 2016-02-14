@@ -35,7 +35,7 @@ extension UIImage {
     }
 
     func imageAfterApplyingAppIconMask() -> UIImage? {
-        if let maskImage = UIImage(named: "iOS 7 Icon Mask", inBundle: Utilities.framworkBundle, compatibleWithTraitCollection: nil) {
+        if let maskImage = Utilities.image(imageName: "iOS 7 Icon Mask", inBundle: Utilities.assetsBundle) {
             return self.imageAfterApplyingMask(maskImage)
         } else {
             return nil

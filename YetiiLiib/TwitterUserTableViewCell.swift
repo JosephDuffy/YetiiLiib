@@ -10,7 +10,7 @@ import UIKit
 
 private typealias TwitterApplication = (title: String, url: NSURL)
 
-public class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell {
+public class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell, UIActionSheetDelegate {
 
     private lazy var actionSheetTwitterApplications: [TwitterApplication] = {
         var actionSheetTwitterApplications = [TwitterApplication]()
@@ -42,6 +42,20 @@ public class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell {
         return actionSheetTwitterApplications
     }()
 
+    @available(iOS, deprecated=8.0)
+    public lazy var actionSheet: UIActionSheet = {
+        let actionSheet = UIActionSheet(title: "Choose how to view @\(self.username)'s profile", delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
+
+        for application in self.actionSheetTwitterApplications {
+            actionSheet.addButtonWithTitle(application.title)
+        }
+
+        actionSheet.addButtonWithTitle("Cancel")
+        actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1
+        return actionSheet
+    }()
+
+    @available(iOS 8.0, *)
     public lazy var alertController: UIAlertController = {
         let controller = UIAlertController(title: self.username, message: "Choose how to view @\(self.username)'s profile", preferredStyle: .ActionSheet)
         controller.popoverPresentationController?.sourceView = self
@@ -73,6 +87,14 @@ public class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell {
 
     public var username: String {
         return self.user.twitterUsername!
+    }
+
+    @available(iOS, obsoleted=8.0)
+    public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        guard buttonIndex != actionSheet.cancelButtonIndex else { return }
+
+        let application = self.actionSheetTwitterApplications[buttonIndex]
+        UIApplication.sharedApplication().openURL(application.url)
     }
     
 }
