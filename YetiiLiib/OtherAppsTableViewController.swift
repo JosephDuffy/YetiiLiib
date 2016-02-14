@@ -55,7 +55,7 @@ public class OtherAppsTableViewController: UITableViewController {
 
         self.tableView.estimatedRowHeight = 43.5
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.registerNib(UINib(nibName: "AppInformationTableViewCell", bundle: Utilities.assetsBundle), forCellReuseIdentifier: "AppInformationCell")
+        self.tableView.registerNib(UINib(nibName: "AppInformationTableViewCell", bundle: Utilities.assetsBundle), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
 
         if let developerId = self.developerId {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
@@ -68,7 +68,9 @@ public class OtherAppsTableViewController: UITableViewController {
                     }
                 }
 
-                guard let url = NSURL(string: "https://itunes.apple.com/lookup?id=\(developerId)&entity=software&county=\(self.countryCode)") else {
+                let urlString = "https://itunes.apple.com/lookup?id=\(developerId)&entity=software&country=\(self.countryCode)"
+                guard let url = NSURL(string: urlString) else {
+                    print("Failed to create NSURL from string: \(urlString)")
                     errorLoadingData()
                     return
                 }
@@ -170,7 +172,7 @@ public class OtherAppsTableViewController: UITableViewController {
     }
 
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AppInformationCell", forIndexPath: indexPath) as! AppInformationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(AppInformationTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! AppInformationTableViewCell
 
         if cell.appMetaData == nil {
             cell.appMetaData = self.appMetaDatas[indexPath.row]

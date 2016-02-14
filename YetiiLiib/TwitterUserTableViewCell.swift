@@ -11,6 +11,9 @@ import UIKit
 private typealias TwitterApplication = (title: String, url: NSURL)
 
 public class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell, UIActionSheetDelegate {
+    override class func reuseIdentifier() -> String {
+        return "TwitterUserTableViewCell"
+    }
 
     private lazy var actionSheetTwitterApplications: [TwitterApplication] = {
         var actionSheetTwitterApplications = [TwitterApplication]()

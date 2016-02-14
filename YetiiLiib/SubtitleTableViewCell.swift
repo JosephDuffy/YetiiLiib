@@ -9,6 +9,9 @@
 import UIKit
 
 class SubtitleTableViewCell: UITableViewCell {
+    class func reuseIdentifier() -> String {
+        return "SubtitleTableViewCell"
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)

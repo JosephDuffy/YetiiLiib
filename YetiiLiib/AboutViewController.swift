@@ -50,8 +50,8 @@ public class AboutViewController: UITableViewController {
         // Uncomment this line to hide the top line of the table view
         //        self.tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         self.tableView.alwaysBounceVertical = false
-        self.tableView.registerClass(TwitterUserTableViewCell.self, forCellReuseIdentifier: "TwitterUserCell")
-        self.tableView.registerClass(SubtitleTableViewCell.self, forCellReuseIdentifier: "PersonCell")
+        self.tableView.registerClass(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
+        self.tableView.registerClass(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -122,11 +122,11 @@ public class AboutViewController: UITableViewController {
             }
 
             if person.twitterUsername != nil {
-                let cell = self.tableView.dequeueReusableCellWithIdentifier("TwitterUserCell", forIndexPath: indexPath) as! TwitterUserTableViewCell
+                let cell = self.tableView.dequeueReusableCellWithIdentifier(TwitterUserTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! TwitterUserTableViewCell
                 cell.user = person
                 return cell
             } else {
-                let cell = self.tableView.dequeueReusableCellWithIdentifier("PersonCell", forIndexPath: indexPath)
+                let cell = self.tableView.dequeueReusableCellWithIdentifier(SubtitleTableViewCell.reuseIdentifier(), forIndexPath: indexPath)
                 cell.textLabel?.text = person.displayName
                 cell.detailTextLabel?.text = person.title
                 cell.selectionStyle = .None

@@ -9,6 +9,10 @@
 import UIKit
 
 public class SubtitleAndRightDetailTableViewCell: UITableViewCell {
+    class func reuseIdentifier() -> String {
+        return "SubtitleAndRightDetailTableViewCell"
+    }
+
     private(set) var rightDetailLabel: UILabel!
     private var didUpdateConstraints = false
 

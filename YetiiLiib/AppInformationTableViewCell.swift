@@ -9,6 +9,10 @@
 import UIKit
 
 public class AppInformationTableViewCell: UITableViewCell {
+    class func reuseIdentifier() -> String {
+        return "AppInformationTableViewCell"
+    }
+
     @IBOutlet weak var appIconImageView: UIImageView!
     @IBOutlet weak var appIconActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var appNameLabel: UILabel!

@@ -9,6 +9,10 @@
 import UIKit
 
 class RightDetailTableViewCell: UITableViewCell {
+    class func reuseIdentifier() -> String {
+        return "RightDetailTableViewCell"
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .Value1, reuseIdentifier: reuseIdentifier)
     }
