@@ -25,10 +25,19 @@ public class SubtitleAndRightDetailTableViewCell: UITableViewCell {
 
         self.contentView.addSubview(rightDetailLabel)
 
-        self.contentView.addConstraints([
-            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self.contentView, attribute: .Trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1, constant: 0),
-            ])
+        if #available(iOS 8.0, *) {
+            self.contentView.addConstraint(
+                NSLayoutConstraint(item: self.rightDetailLabel, attribute: .TrailingMargin, relatedBy: .Equal, toItem: self.contentView, attribute: .TrailingMargin, multiplier: 1, constant: -8)
+            )
+        } else {
+            self.contentView.addConstraint(
+                NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self.contentView, attribute: .Trailing, multiplier: 1, constant: -8)
+            )
+        }
+
+        self.contentView.addConstraint(
+            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1, constant: 0)
+        )
 
         self.contentView.addConstraints([
             NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Leading, relatedBy: .GreaterThanOrEqual, toItem: self.textLabel, attribute: .Trailing, multiplier: 1, constant: 8),
