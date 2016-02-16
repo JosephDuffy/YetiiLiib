@@ -202,8 +202,7 @@ public class OtherAppsTableViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(AppInformationTableViewCell.reuseIdentifier()) as! AppInformationTableViewCell
             cell.appMetaData = self.appMetaDatas[indexPath.row]
-            cell.setNeedsLayout()
-            cell.layoutIfNeeded()
+            cell.layoutSubviews()
             return cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height + 1
         }
     }
