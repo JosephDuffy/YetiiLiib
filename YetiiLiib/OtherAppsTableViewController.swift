@@ -84,22 +84,18 @@ public class OtherAppsTableViewController: UITableViewController {
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
                     if let JSON = json as? [String : AnyObject] {
-                        if let resultsCount = JSON["resultCount"] as? Int, results = JSON["results"] as? [[String : AnyObject]] {
-                            if resultsCount > 0 && self.companyName == nil {
-                                self.companyName = results[0]["artistName"] as? String
+                        if let results = JSON["results"] as? [[String : AnyObject]] {
+                            if let firstResult = results.first where self.companyName == nil {
+                                self.companyName = firstResult["artistName"] as? String
                             }
 
-                            if resultsCount > 1 {
-                                for i in 1..<resultsCount {
-                                    let appInformation = results[i]
+                            for appInformation in results {
+                                guard let appMetaData = AppMetaData(rawInformation: appInformation) else { continue }
 
-                                    guard let appMetaData = AppMetaData(rawInformation: appInformation) else { break }
+                                // Don't include the current app
+                                guard appMetaData.bundleId != Utilities.getAppBundleId() else { continue }
 
-                                    // Don't include the current app
-                                    guard appMetaData.bundleId != Utilities.getAppBundleId() else { break }
-
-                                    self.appMetaDatas.append(appMetaData)
-                                }
+                                self.appMetaDatas.append(appMetaData)
                             }
                         }
                     } else {
