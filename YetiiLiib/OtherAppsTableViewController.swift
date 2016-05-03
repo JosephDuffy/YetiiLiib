@@ -82,7 +82,6 @@ public class OtherAppsTableViewController: UITableViewController {
                 }
 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
                     if let JSON = json as? [String : AnyObject] {
                         if let results = JSON["results"] as? [[String : AnyObject]] {
                             if let firstResult = results.first where self.companyName == nil {
