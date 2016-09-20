@@ -8,33 +8,33 @@
 
 import UIKit
 
-class AboutTableViewHeaderView: UIView {
-    let imageView = UIImageView()
-    let appNameLabel = UILabel(fontStyle: UIFontTextStyleHeadline)
-    let descriptionLabel = UILabel()
+public final class AboutTableViewHeaderView: UIView {
+    public let imageView = UIImageView()
+    public let appNameLabel = UILabel(fontStyle: UIFontTextStyle.headline.rawValue)
+    public let descriptionLabel = UILabel()
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let appName = Utilities.getAppName()
-        let appVersion = Utilities.getAppVersion()
-        let appBuild = Utilities.getAppBuild()
+        let appName = Bundle.main.appName
+        let appVersion = Bundle.main.appVersion
+        let appBuild = Bundle.main.appBuild
 
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        if let image = Utilities.getAboutScreenAppIconImage() {
+        if let image = UIImage(named: "App Icon 128pt", in: Bundle.main, compatibleWith: nil) {
             self.imageView.image = image.imageAfterApplyingAppIconMask()
         } else {
             print("Failed to get app icon image")
         }
 
         self.appNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.appNameLabel.textAlignment = .Center
+        self.appNameLabel.textAlignment = .center
         self.appNameLabel.text = "\(appName) \(appVersion) (build \(appBuild))"
         self.appNameLabel.sizeToFit()
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.textAlignment = .Center
+        self.descriptionLabel.textAlignment = .center
         self.descriptionLabel.text = "\(appName) is lovingly created by Yetii Ltd., and wouldn't be possible without these awesome people."
         self.updateDescriptionLabelPMLW()
 
@@ -44,29 +44,29 @@ class AboutTableViewHeaderView: UIView {
 
         self.addConstraints([
             // App icon constraints
-            NSLayoutConstraint(item: self.imageView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: self.imageView, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.imageView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 128),
-            NSLayoutConstraint(item: self.imageView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 128),
+            NSLayoutConstraint(item: self.imageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: self.imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128),
+            NSLayoutConstraint(item: self.imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128),
 
             // App name label constraints
-            NSLayoutConstraint(item: self.appNameLabel, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: self.appNameLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1, constant: 16),
-            NSLayoutConstraint(item: self.appNameLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: -16),
+            NSLayoutConstraint(item: self.appNameLabel, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: self.appNameLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 16),
+            NSLayoutConstraint(item: self.appNameLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -16),
 
             // Description label constrains
-            NSLayoutConstraint(item: self.descriptionLabel, attribute: .Top, relatedBy: .Equal, toItem: self.appNameLabel, attribute: .Bottom, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: self.descriptionLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1, constant: 16),
-            NSLayoutConstraint(item: self.descriptionLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: -16),
-            NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: self.descriptionLabel, attribute: .Bottom, multiplier: 1, constant: 8)
+            NSLayoutConstraint(item: self.descriptionLabel, attribute: .top, relatedBy: .equal, toItem: self.appNameLabel, attribute: .bottom, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: self.descriptionLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 16),
+            NSLayoutConstraint(item: self.descriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -16),
+            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.descriptionLabel, attribute: .bottom, multiplier: 1, constant: 8)
             ])
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         self.updateDescriptionLabelPMLW()
 
         super.layoutSubviews()
@@ -100,7 +100,7 @@ class AboutTableViewHeaderView: UIView {
             // This should also check for iPads (specifically iPad Air 2), which fixes the issue
             // of the label being truncated ("...") when using the slide in feature
             if #available(iOS 9.0, *) {
-                if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+                if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
                     self.superview?.setNeedsLayout()
                     self.superview?.layoutIfNeeded()
                 }

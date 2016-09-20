@@ -8,12 +8,13 @@
 
 import UIKit
 
-public class OtherAppsTableViewController: UITableViewController {
+public final class OtherAppsTableViewController: UITableViewController {
 
     public var appMetaDatas: [AppMetaData] = []
+    public var companyName: String?
+
     public private(set) var hasLoadedApps = false
     public private(set) var errorLoadingApps = false
-    public var companyName: String?
 
     /**
      The id of the developer to get the app information for. If `nil` no app information
@@ -45,7 +46,7 @@ public class OtherAppsTableViewController: UITableViewController {
      Defaults to "us" if the code cannot be loaded from NSLocale
      */
     public var countryCode: String = {
-        return NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String ?? "us"
+        return (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String ?? "us"
     }()
 
     public override func viewDidLoad() {
@@ -55,36 +56,36 @@ public class OtherAppsTableViewController: UITableViewController {
 
         self.tableView.estimatedRowHeight = 43.5
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.registerNib(UINib(nibName: "AppInformationTableViewCell", bundle: Utilities.assetsBundle), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
+        self.tableView.register(UINib(nibName: "AppInformationTableViewCell", bundle: Bundle.framework), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
 
         if let developerId = self.developerId {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            DispatchQueue.global().async {
                 func errorLoadingData() {
                     self.hasLoadedApps = true
                     self.errorLoadingApps = true
 
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                 }
 
                 let urlString = "https://itunes.apple.com/lookup?id=\(developerId)&entity=software&country=\(self.countryCode)"
-                guard let url = NSURL(string: urlString) else {
+                guard let url = URL(string: urlString) else {
                     print("Failed to create NSURL from string: \(urlString)")
                     errorLoadingData()
                     return
                 }
 
-                guard let data = NSData(contentsOfURL: url) else {
+                guard let data = try? Data(contentsOf: url) else {
                     print("Failed to load NSData from url: \(url)")
                     errorLoadingData()
                     return
                 }
 
                 do {
-                    if let JSON = json as? [String : AnyObject] {
+                    if let JSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] {
                         if let results = JSON["results"] as? [[String : AnyObject]] {
-                            if let firstResult = results.first where self.companyName == nil {
+                            if self.companyName == nil, let firstResult = results.first {
                                 self.companyName = firstResult["artistName"] as? String
                             }
 
@@ -92,7 +93,7 @@ public class OtherAppsTableViewController: UITableViewController {
                                 guard let appMetaData = AppMetaData(rawInformation: appInformation) else { continue }
 
                                 // Don't include the current app
-                                guard appMetaData.bundleId != Utilities.getAppBundleId() else { continue }
+                                guard appMetaData.bundleId != Bundle.main.bundleIdentifier else { continue }
 
                                 self.appMetaDatas.append(appMetaData)
                             }
@@ -103,7 +104,8 @@ public class OtherAppsTableViewController: UITableViewController {
 
                     self.hasLoadedApps = true
                     self.errorLoadingApps = false
-                    dispatch_async(dispatch_get_main_queue()) {
+                    
+                    DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                 } catch {
@@ -116,7 +118,7 @@ public class OtherAppsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
         if self.appMetaDatas.count > 0 {
             self.tableView.backgroundView = nil
 
@@ -134,11 +136,11 @@ public class OtherAppsTableViewController: UITableViewController {
                 } else {
                     label.text = "No Other Apps Found"
                 }
-                label.textAlignment = .Center
+                label.textAlignment = .center
                 label.numberOfLines = 0
                 label.translatesAutoresizingMaskIntoConstraints = false
 
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
                 if !self.hasLoadedApps {
                     activityIndicator.startAnimating()
                 }
@@ -148,11 +150,11 @@ public class OtherAppsTableViewController: UITableViewController {
                 backgroundView.addSubview(activityIndicator)
 
                 backgroundView.addConstraints([
-                    NSLayoutConstraint(item: label, attribute: .Leading, relatedBy: .Equal, toItem: backgroundView, attribute: .Leading, multiplier: 1, constant: 16),
-                    NSLayoutConstraint(item: label, attribute: .Trailing, relatedBy: .Equal, toItem: backgroundView, attribute: .Trailing, multiplier: 1, constant: -16),
-                    NSLayoutConstraint(item: label, attribute: .Bottom, relatedBy: .Equal, toItem: backgroundView, attribute: .CenterY, multiplier: 1, constant: -8),
-                    NSLayoutConstraint(item: activityIndicator, attribute: .Top, relatedBy: .Equal, toItem: backgroundView, attribute: .CenterY, multiplier: 1, constant: 8),
-                    NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: backgroundView, attribute: .CenterX, multiplier: 1, constant: 0)
+                    NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: backgroundView, attribute: .leading, multiplier: 1, constant: 16),
+                    NSLayoutConstraint(item: label, attribute: .trailing, relatedBy: .equal, toItem: backgroundView, attribute: .trailing, multiplier: 1, constant: -16),
+                    NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .centerY, multiplier: 1, constant: -8),
+                    NSLayoutConstraint(item: activityIndicator, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .centerY, multiplier: 1, constant: 8),
+                    NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: backgroundView, attribute: .centerX, multiplier: 1, constant: 0)
                     ])
 
                 self.tableView.backgroundView = backgroundView
@@ -162,44 +164,33 @@ public class OtherAppsTableViewController: UITableViewController {
         }
     }
 
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.appMetaDatas.count
     }
 
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(AppInformationTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! AppInformationTableViewCell
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: AppInformationTableViewCell.reuseIdentifier(), for: indexPath) as! AppInformationTableViewCell
 
         if cell.appMetaData == nil {
-            cell.appMetaData = self.appMetaDatas[indexPath.row]
+            cell.appMetaData = self.appMetaDatas[(indexPath as NSIndexPath).row]
         }
 
         return cell
     }
 
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let appMetaData = self.appMetaDatas[indexPath.row]
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let appMetaData = self.appMetaDatas[(indexPath as NSIndexPath).row]
 
         do {
             let url = try appMetaData.appStoreURL(campaignProviderId: self.campaignProviderId, campaignToken: self.campaignToken)
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url as URL)
         } catch let error as URLGenerationError {
             print(error)
         } catch {
             print("Unknown error generating application URL")
         }
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-
-    public override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if #available(iOS 8, *) {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(AppInformationTableViewCell.reuseIdentifier()) as! AppInformationTableViewCell
-            cell.appMetaData = self.appMetaDatas[indexPath.row]
-            cell.layoutSubviews()
-            return cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height + 1
-        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

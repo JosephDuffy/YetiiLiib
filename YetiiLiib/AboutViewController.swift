@@ -9,29 +9,57 @@
 import UIKit
 import QuartzCore
 
-public class AboutViewController: UITableViewController {
+final class AboutViewController: UITableViewController {
+    typealias TwitterApplication = (title: String, url: URL)
 
-    var actionSheetButtonURLs: [Int : NSURL]!
-    var headerView: UIView!
+    private var headerView: UIView!
 
     public var primaryPeople: [AboutScreenUser] = [
         AboutScreenUser(displayName: "Yetii Ltd.", title: "Company News", twitterUsername: "YetiiNet"),
         AboutScreenUser(displayName: "Joseph Duffy", title: "Developer", twitterUsername: "Joe_Duffy")
     ]
 
-    public var specialThanksPeople: [AboutScreenUser] = [
+    public var specialThanksPeople: [AboutScreenUser] = []
 
-    ]
+    lazy var actionSheetTwitterApplications: [TwitterApplication] = {
+        var actionSheetTwitterApplications = [TwitterApplication]()
+
+        let sharedApplication = UIApplication.shared
+        if sharedApplication.canOpenURL(URL(string: "tweetbot://")!), let url = URL(string: "tweetbot:///user_profile/") {
+            // Tweetbot is installed
+            actionSheetTwitterApplications.append(TwitterApplication("Tweetbot", url))
+        }
+
+        if sharedApplication.canOpenURL(URL(string: "twitterrific://")!), let url = URL(string: "twitterrific:///profile?screen_name=") {
+            // Twitterrific is installed
+            actionSheetTwitterApplications.append(TwitterApplication("Twitterrific", url))
+        }
+
+        if sharedApplication.canOpenURL(URL(string: "twitter://")!), let url = URL(string: "twitter://user?screen_name=") {
+            // Twitter is installed
+            actionSheetTwitterApplications.append(TwitterApplication("Twitter", url))
+        }
+
+        if sharedApplication.canOpenURL(URL(string: "googlechromes://")!), let url = URL(string: "googlechromes://www.twitter.com/") {
+            // Google Chrome is installed
+            actionSheetTwitterApplications.append(TwitterApplication("Google Chrome", url))
+        }
+
+        let safariURL = URL(string: "https://www.twitter.com/")!
+        actionSheetTwitterApplications.append(TwitterApplication("Safari", safariURL))
+
+        return actionSheetTwitterApplications
+    }()
 
     public init(applicationUser: AboutScreenUser, specialThanksPeople: [AboutScreenUser]) {
-        super.init(style: .Grouped)
+        super.init(style: .grouped)
 
-        self.primaryPeople.insert(applicationUser, atIndex: 0)
+        self.primaryPeople.insert(applicationUser, at: 0)
         self.specialThanksPeople = specialThanksPeople
     }
 
     // Required for iOS 7
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -39,7 +67,7 @@ public class AboutViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         if let currentTableHeaderView = self.tableView.tableHeaderView {
@@ -47,28 +75,27 @@ public class AboutViewController: UITableViewController {
         }
         // Setting the table header view with a height of 0.01 fixes a bug that adds a gap between the
         // tableHeaderView (once added) and the top row. See: http://stackoverflow.com/a/18938763/657676
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 0.01))
-        self.headerView = AboutTableViewHeaderView(frame: CGRectZero)
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 0.01))
+        self.headerView = AboutTableViewHeaderView(frame: CGRect.zero)
 
         self.title = "About"
 
         // Uncomment this line to hide the top line of the table view
         //        self.tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         self.tableView.alwaysBounceVertical = false
-        self.tableView.registerClass(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
-        self.tableView.registerClass(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
+        self.tableView.register(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
+        self.tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
 
-    public override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         if let tableHeaderView = self.headerView {
-            var frame = CGRectZero
-            frame.size.width = self.tableView.bounds.size.width
-            frame.size.height = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-            if self.tableView.tableHeaderView == nil || !CGRectEqualToRect(frame, tableHeaderView.frame) {
+            var frame = self.tableView.frame
+            frame.size.height = tableHeaderView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            if self.tableView.tableHeaderView == nil || !frame.equalTo(tableHeaderView.frame) {
                 tableHeaderView.frame = frame
 
                 tableHeaderView.setNeedsLayout()
@@ -79,43 +106,44 @@ public class AboutViewController: UITableViewController {
         }
     }
 
-    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return self.specialThanksPeople.count > 0 ? 2 : 1
     }
 
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return self.primaryPeople.count
         } else if section == 1 {
             return self.specialThanksPeople.count
+        } else {
+             return 0
         }
-        fatalError("Cannot get a number of rows for a section that doesn't exist")
     }
 
-    public override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
         }
         return UITableViewAutomaticDimension
     }
 
-    public override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return UIView(frame: CGRectZero)
+            return UIView(frame: CGRect.zero)
         }
         return nil
     }
 
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
             return "Special Thanks"
         }
         return nil
     }
 
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let section = indexPath.section
-        let row = indexPath.row
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
 
         if section == 0 || section == 1 {
             let person: AboutScreenUser
@@ -127,31 +155,59 @@ public class AboutViewController: UITableViewController {
             }
 
             if person.twitterUsername != nil {
-                let cell = self.tableView.dequeueReusableCellWithIdentifier(TwitterUserTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! TwitterUserTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: TwitterUserTableViewCell.reuseIdentifier(), for: indexPath) as! TwitterUserTableViewCell
                 cell.user = person
                 return cell
             } else {
-                let cell = self.tableView.dequeueReusableCellWithIdentifier(SubtitleTableViewCell.reuseIdentifier(), forIndexPath: indexPath)
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SubtitleTableViewCell.reuseIdentifier(), for: indexPath)
                 cell.textLabel?.text = person.displayName
                 cell.detailTextLabel?.text = person.title
-                cell.selectionStyle = .None
+                cell.selectionStyle = .none
                 return cell
             }
         }
 
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let twitterCell = self.tableView.cellForRowAtIndexPath(indexPath) as? TwitterUserTableViewCell {
-            if #available(iOS 8.0, *) {
-                let alertController = twitterCell.alertController
-                self.presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                let actionSheet = twitterCell.actionSheet
-                actionSheet.showInView(self.view)
-            }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let person = person(for: indexPath) else { return }
+        guard let username = person.twitterUsername else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+
+        let alertController = UIAlertController(title: username, message: "Choose how to view @\(username)'s profile", preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
+
+        for application in self.actionSheetTwitterApplications {
+            let action = UIAlertAction(title: application.title, style: .default, handler: { action in
+                var url = application.url
+                url.appendPathComponent(username)
+
+                UIApplication.shared.openURL(url)
+            })
+
+            alertController.addAction(action)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    private func person(for indexPath: IndexPath) -> AboutScreenUser? {
+        let section = indexPath.section
+        let row = indexPath.row
+
+        if section == 0 && row < primaryPeople.count {
+            return primaryPeople[row]
+        } else if section == 1 && row < specialThanksPeople.count {
+            return specialThanksPeople[row]
+        } else {
+            return nil
         }
     }
     

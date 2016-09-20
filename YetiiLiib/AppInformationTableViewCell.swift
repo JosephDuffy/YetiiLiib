@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class AppInformationTableViewCell: UITableViewCell {
-    class func reuseIdentifier() -> String {
+public final class AppInformationTableViewCell: UITableViewCell {
+    public class func reuseIdentifier() -> String {
         return "AppInformationTableViewCell"
     }
 
@@ -18,37 +18,37 @@ public class AppInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet weak var appPriceLabel: UILabel!
 
-    public override var textLabel: UILabel? {
+    open override var textLabel: UILabel? {
         get {
             return self.appNameLabel
         }
     }
 
-    public override var detailTextLabel: UILabel? {
+    open override var detailTextLabel: UILabel? {
         get {
             return self.appPriceLabel
         }
     }
 
-    public override var imageView: UIImageView? {
+    open override var imageView: UIImageView? {
         get {
             return self.appIconImageView
         }
     }
 
-    public internal(set) var appMetaData: AppMetaData? {
+    public var appMetaData: AppMetaData? {
         didSet {
             if let appMetaData = self.appMetaData {
-                self.setupForAppMetaData(appMetaData)
+                self.setup(for: appMetaData)
             }
         }
     }
 
-    private func setupForAppMetaData(appMetaData: AppMetaData) {
+    fileprivate func setup(for appMetaData: AppMetaData) {
         self.appNameLabel.text = appMetaData.name
         self.appPriceLabel.text = appMetaData.formattedPrice
 
-        if let imageView = self.imageView where imageView.image == nil {
+        if let imageView = self.imageView , imageView.image == nil {
             self.appIconActivityIndicator.startAnimating()
             appMetaData.imageForSize(imageView.frame.size, callback: { (image) -> Void in
                 imageView.image = image
@@ -59,7 +59,7 @@ public class AppInformationTableViewCell: UITableViewCell {
         }
     }
 
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
 
         self.appNameLabel.preferredMaxLayoutWidth = self.appNameLabel.frame.size.width

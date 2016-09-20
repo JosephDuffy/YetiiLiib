@@ -13,9 +13,9 @@ public struct AppMetaData {
     public let bundleId: String
     public let name: String
     public let formattedPrice: String
-    public let artworkURL60: NSURL
-    public let artworkURL100: NSURL
-    public let artworkURL512: NSURL
+    public let artworkURL60: URL
+    public let artworkURL100: URL
+    public let artworkURL512: URL
 
     public init?(rawInformation: [String : AnyObject]) {
         // Mac apps don't return the "supportedDevices" field and can be filtered as such
@@ -26,11 +26,11 @@ public struct AppMetaData {
         guard let name = rawInformation["trackName"] as? String else { return nil }
         guard let formattedPrice = rawInformation["formattedPrice"] as? String else { return nil }
         guard let artworkURL60String = rawInformation["artworkUrl60"] as? String else { return nil }
-        guard let artworkURL60 = NSURL(string: artworkURL60String) else { return nil }
+        guard let artworkURL60 = URL(string: artworkURL60String) else { return nil }
         guard let artworkURL100String = rawInformation["artworkUrl100"] as? String else { return nil }
-        guard let artworkURL100 = NSURL(string: artworkURL100String) else { return nil }
+        guard let artworkURL100 = URL(string: artworkURL100String) else { return nil }
         guard let artworkURL512String = rawInformation["artworkUrl512"] as? String else { return nil }
-        guard let artworkURL512 = NSURL(string: artworkURL512String) else { return nil }
+        guard let artworkURL512 = URL(string: artworkURL512String) else { return nil }
 
         self.appId = appId
         self.bundleId = bundleId
@@ -41,13 +41,13 @@ public struct AppMetaData {
         self.artworkURL512 = artworkURL512
     }
 
-    public func imageForSize(size: CGSize, applyIconRounding: Bool = true, scale: CGFloat = UIScreen.mainScreen().scale, callback: (UIImage?) -> Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    public func imageForSize(_ size: CGSize, applyIconRounding: Bool = true, scale: CGFloat = UIScreen.main.scale, callback: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global().async {
             let minWidth = size.width * scale
             let minHeight = size.height * scale
             let minSize = max(minWidth, minHeight)
 
-            let url: NSURL = {
+            let url: URL = {
                 if minSize <= 60 {
                     return self.artworkURL60
                 } else if minSize <= 100 {
@@ -57,7 +57,7 @@ public struct AppMetaData {
                 }
             }()
 
-            if let data = NSData(contentsOfURL: url), image = UIImage(data: data) {
+            if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 let imageToReturn: UIImage?
 
                 if applyIconRounding {
@@ -66,11 +66,11 @@ public struct AppMetaData {
                     imageToReturn = image
                 }
 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     callback(imageToReturn)
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     callback(nil)
                 }
             }
@@ -94,13 +94,13 @@ public struct AppMetaData {
 
      - Returns: The generated url
      */
-    public func appStoreURL(campaignProviderId campaignProviderId: Int?, campaignToken: String?) throws -> NSURL {
+    public func appStoreURL(campaignProviderId: Int?, campaignToken: String?) throws -> URL {
         var url = "itms-apps://itunes.apple.com/app/apple-store/id\(self.appId)"
         var hasAddedParameter = false
 
-        func addParamter(name: String, value: String) throws {
-            guard let encodedValue = value.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet()) else {
-                throw URLGenerationError.ParamterEncodingFailure(name: name, value: value)
+        func addParamter(_ name: String, value: String) throws {
+            guard let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+                throw URLGenerationError.paramterEncodingFailure(name: name, value: value)
             }
 
             if hasAddedParameter {
@@ -119,35 +119,35 @@ public struct AppMetaData {
 
         if let campaignToken = campaignToken {
             if campaignToken.characters.count > 40 {
-                throw URLGenerationError.CampaignTokenTooLong
+                throw URLGenerationError.campaignTokenTooLong
             }
             try addParamter("ct", value: campaignToken)
         }
 
         try addParamter("mt", value: "8")
 
-        if let url = NSURL(string: url) {
+        if let url = URL(string: url) {
             return url
         } else {
-            throw URLGenerationError.InvalidURLString(url: url)
+            throw URLGenerationError.invalidURLString(url: url)
         }
     }
 }
 
-public enum URLGenerationError: ErrorType {
-    case InvalidURLString(url: String)
-    case ParamterEncodingFailure(name: String, value: String)
-    case CampaignTokenTooLong
+public enum URLGenerationError: Error {
+    case invalidURLString(url: String)
+    case paramterEncodingFailure(name: String, value: String)
+    case campaignTokenTooLong
 }
 
 extension URLGenerationError: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .InvalidURLString(let url):
+        case .invalidURLString(let url):
             return"Failed to generate URL with string: \(url)"
-        case .ParamterEncodingFailure(let name, let value):
+        case .paramterEncodingFailure(let name, let value):
             return "Failed to encode paramter \(name) value \(value)"
-        case .CampaignTokenTooLong:
+        case .campaignTokenTooLong:
             return "Campaign Token must be 40 characters or less"
         }
     }

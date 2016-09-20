@@ -8,16 +8,16 @@
 
 import UIKit
 
-class SubtitleTableViewCell: UITableViewCell {
-    class func reuseIdentifier() -> String {
+public class SubtitleTableViewCell: UITableViewCell {
+    public class func reuseIdentifier() -> String {
         return "SubtitleTableViewCell"
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

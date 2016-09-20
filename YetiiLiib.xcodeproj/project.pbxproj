@@ -19,26 +19,10 @@
 		D921119C1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */; };
 		D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */; };
 		D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */; };
-		D92111A31C15D2B4003DB330 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A21C15D2B4003DB330 /* Utilities.swift */; };
+		D92111A31C15D2B4003DB330 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A21C15D2B4003DB330 /* Bundle+Extensions.swift */; };
 		D92111A51C15D61D003DB330 /* AboutScreenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A41C15D61D003DB330 /* AboutScreenUser.swift */; };
 		D92111BD1C15FFD8003DB330 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */; };
 		D92111BF1C16013E003DB330 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D92111BE1C16013E003DB330 /* Media.xcassets */; };
-		D97491BC1C70A9BE007700FA /* YetiiLiib iOS 7.h in Headers */ = {isa = PBXBuildFile; fileRef = D97491BB1C70A9BE007700FA /* YetiiLiib iOS 7.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D97491D01C70AA46007700FA /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */; };
-		D97491D11C70AA46007700FA /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */; };
-		D97491D21C70AA46007700FA /* TwitterUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */; };
-		D97491D31C70AA46007700FA /* SubtitleAndRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */; };
-		D97491D41C70AA46007700FA /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */; };
-		D97491D51C70AA46007700FA /* RightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4D51C17A262005BA928 /* RightDetailTableViewCell.swift */; };
-		D97491D61C70AA46007700FA /* AppInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */; };
-		D97491D71C70AA46007700FA /* AppInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */; };
-		D97491D81C70AA46007700FA /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111921C15D159003DB330 /* AboutViewController.swift */; };
-		D97491D91C70AA46007700FA /* AboutTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */; };
-		D97491DA1C70AA46007700FA /* AboutScreenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A41C15D61D003DB330 /* AboutScreenUser.swift */; };
-		D97491DB1C70AA46007700FA /* OtherAppsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */; };
-		D97491DC1C70AA46007700FA /* AppMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920E4D31C179D6B005BA928 /* AppMetaData.swift */; };
-		D97491DD1C70AA46007700FA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A21C15D2B4003DB330 /* Utilities.swift */; };
-		D97491DE1C70AA46007700FA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D92111BE1C16013E003DB330 /* Media.xcassets */; };
 		D97DD17A1C185C6800F0D11F /* AppInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */; };
 		D97DD17B1C185C6800F0D11F /* AppInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -69,13 +53,10 @@
 		D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleAndRightDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
-		D92111A21C15D2B4003DB330 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D92111A21C15D2B4003DB330 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		D92111A41C15D61D003DB330 /* AboutScreenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScreenUser.swift; sourceTree = "<group>"; };
 		D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		D92111BE1C16013E003DB330 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		D97491B91C70A9BE007700FA /* YetiiLiibiOS7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YetiiLiibiOS7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D97491BB1C70A9BE007700FA /* YetiiLiib iOS 7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YetiiLiib iOS 7.h"; sourceTree = "<group>"; };
-		D97491BD1C70A9BE007700FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInformationTableViewCell.swift; sourceTree = "<group>"; };
 		D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppInformationTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,13 +77,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D97491B51C70A9BE007700FA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,7 +94,6 @@
 			children = (
 				D92111791C15D10A003DB330 /* YetiiLiib */,
 				D92111851C15D10A003DB330 /* YetiiLiibTests */,
-				D97491BA1C70A9BE007700FA /* YetiiLiib iOS 7 */,
 				D92111781C15D10A003DB330 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,7 +103,6 @@
 			children = (
 				D92111771C15D10A003DB330 /* YetiiLiib.framework */,
 				D92111811C15D10A003DB330 /* YetiiLiibTests.xctest */,
-				D97491B91C70A9BE007700FA /* YetiiLiibiOS7.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,7 +116,6 @@
 				D920E4CE1C179850005BA928 /* Other Apps Screen */,
 				D921117A1C15D10A003DB330 /* YetiiLiib.h */,
 				D921117C1C15D10A003DB330 /* Info.plist */,
-				D92111A21C15D2B4003DB330 /* Utilities.swift */,
 				D92111BE1C16013E003DB330 /* Media.xcassets */,
 			);
 			path = YetiiLiib;
@@ -187,17 +158,9 @@
 			children = (
 				D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */,
 				D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */,
+				D92111A21C15D2B4003DB330 /* Bundle+Extensions.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		D97491BA1C70A9BE007700FA /* YetiiLiib iOS 7 */ = {
-			isa = PBXGroup;
-			children = (
-				D97491BB1C70A9BE007700FA /* YetiiLiib iOS 7.h */,
-				D97491BD1C70A9BE007700FA /* Info.plist */,
-			);
-			path = "YetiiLiib iOS 7";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,14 +171,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D921117B1C15D10A003DB330 /* YetiiLiib.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D97491B61C70A9BE007700FA /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D97491BC1C70A9BE007700FA /* YetiiLiib iOS 7.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,24 +213,6 @@
 			productReference = D92111811C15D10A003DB330 /* YetiiLiibTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D97491B81C70A9BE007700FA /* YetiiLiibiOS7 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D97491CE1C70A9BE007700FA /* Build configuration list for PBXNativeTarget "YetiiLiibiOS7" */;
-			buildPhases = (
-				D97491B41C70A9BE007700FA /* Sources */,
-				D97491B51C70A9BE007700FA /* Frameworks */,
-				D97491B61C70A9BE007700FA /* Headers */,
-				D97491B71C70A9BE007700FA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = YetiiLiibiOS7;
-			productName = "YetiiLiib iOS 7";
-			productReference = D97491B91C70A9BE007700FA /* YetiiLiibiOS7.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -283,17 +220,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Yetii Ltd.";
 				TargetAttributes = {
 					D92111761C15D10A003DB330 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 					};
 					D92111801C15D10A003DB330 = {
 						CreatedOnToolsVersion = 7.1.1;
-					};
-					D97491B81C70A9BE007700FA = {
-						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -311,7 +247,6 @@
 			targets = (
 				D92111761C15D10A003DB330 /* YetiiLiib */,
 				D92111801C15D10A003DB330 /* YetiiLiibTests */,
-				D97491B81C70A9BE007700FA /* YetiiLiibiOS7 */,
 			);
 		};
 /* End PBXProject section */
@@ -333,15 +268,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D97491B71C70A9BE007700FA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D97491DE1C70AA46007700FA /* Media.xcassets in Resources */,
-				D97491D71C70AA46007700FA /* AppInformationTableViewCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -353,7 +279,7 @@
 				D920E4D61C17A262005BA928 /* RightDetailTableViewCell.swift in Sources */,
 				D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */,
 				D921119A1C15D1D1003DB330 /* TwitterUserTableViewCell.swift in Sources */,
-				D92111A31C15D2B4003DB330 /* Utilities.swift in Sources */,
+				D92111A31C15D2B4003DB330 /* Bundle+Extensions.swift in Sources */,
 				D92111941C15D159003DB330 /* AboutViewController.swift in Sources */,
 				D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */,
 				D97DD17A1C185C6800F0D11F /* AppInformationTableViewCell.swift in Sources */,
@@ -370,26 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D92111871C15D10A003DB330 /* YetiiLiibTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D97491B41C70A9BE007700FA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D97491D21C70AA46007700FA /* TwitterUserTableViewCell.swift in Sources */,
-				D97491D51C70AA46007700FA /* RightDetailTableViewCell.swift in Sources */,
-				D97491DC1C70AA46007700FA /* AppMetaData.swift in Sources */,
-				D97491D01C70AA46007700FA /* UILabel+Extensions.swift in Sources */,
-				D97491DD1C70AA46007700FA /* Utilities.swift in Sources */,
-				D97491D41C70AA46007700FA /* SubtitleTableViewCell.swift in Sources */,
-				D97491DA1C70AA46007700FA /* AboutScreenUser.swift in Sources */,
-				D97491D11C70AA46007700FA /* UIImage+Extensions.swift in Sources */,
-				D97491D61C70AA46007700FA /* AppInformationTableViewCell.swift in Sources */,
-				D97491D91C70AA46007700FA /* AboutTableViewHeaderView.swift in Sources */,
-				D97491D81C70AA46007700FA /* AboutViewController.swift in Sources */,
-				D97491D31C70AA46007700FA /* SubtitleAndRightDetailTableViewCell.swift in Sources */,
-				D97491DB1C70AA46007700FA /* OtherAppsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,8 +323,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -441,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -466,8 +374,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -484,9 +394,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -498,24 +409,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"FRAMEWORK=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D FRAMEWORK";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -523,23 +435,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"FRAMEWORK=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = YetiiLiib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D FRAMEWORK";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -550,6 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -560,38 +474,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		D97491CA1C70A9BE007700FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "YetiiLiib iOS 7/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.yetii.YetiiLiib-iOS-7";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		D97491CB1C70A9BE007700FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "YetiiLiib iOS 7/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.yetii.YetiiLiib-iOS-7";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -624,14 +507,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		D97491CE1C70A9BE007700FA /* Build configuration list for PBXNativeTarget "YetiiLiibiOS7" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D97491CA1C70A9BE007700FA /* Debug */,
-				D97491CB1C70A9BE007700FA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

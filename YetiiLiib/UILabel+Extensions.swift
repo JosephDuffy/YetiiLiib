@@ -12,23 +12,23 @@ extension UILabel {
     convenience init(fontStyle: String) {
         self.init(frame: CGRect.zero)
 
-        self.font = UIFont.preferredFontForTextStyle(fontStyle)
+        self.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle(rawValue: fontStyle))
     }
 
     func currentFontStyle() -> String {
-        if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleBody)) {
-            return UIFontTextStyleBody
-        } else if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)) {
-            return UIFontTextStyleHeadline
-        } else if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)) {
-            return UIFontTextStyleCaption1
-        } else if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)) {
-            return UIFontTextStyleCaption2
-        } else if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)) {
-            return UIFontTextStyleFootnote
-        } else if self.font.isEqual(UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)) {
-            return UIFontTextStyleSubheadline
+        if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)) {
+            return UIFontTextStyle.body.rawValue
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)) {
+            return UIFontTextStyle.headline.rawValue
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)) {
+            return UIFontTextStyle.caption1.rawValue
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)) {
+            return UIFontTextStyle.caption2.rawValue
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)) {
+            return UIFontTextStyle.footnote.rawValue
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)) {
+            return UIFontTextStyle.subheadline.rawValue
         }
-        return UIFontTextStyleBody
+        return UIFontTextStyle.body.rawValue
     }
 }

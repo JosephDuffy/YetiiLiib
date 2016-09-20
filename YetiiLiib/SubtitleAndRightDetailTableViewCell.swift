@@ -9,44 +9,33 @@
 import UIKit
 
 public class SubtitleAndRightDetailTableViewCell: UITableViewCell {
-    class func reuseIdentifier() -> String {
+    public class func reuseIdentifier() -> String {
         return "SubtitleAndRightDetailTableViewCell"
     }
 
-    private(set) var rightDetailLabel: UILabel!
+    public let rightDetailLabel: UILabel
+
     private var didUpdateConstraints = false
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+        self.rightDetailLabel = UILabel()
 
-        let rightDetailLabel = UILabel()
-        self.rightDetailLabel = rightDetailLabel
-        rightDetailLabel.translatesAutoresizingMaskIntoConstraints = false
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+
+        self.rightDetailLabel.translatesAutoresizingMaskIntoConstraints = false
 
         self.contentView.addSubview(rightDetailLabel)
 
-        if #available(iOS 8.0, *) {
-            self.contentView.addConstraint(
-                NSLayoutConstraint(item: self.rightDetailLabel, attribute: .TrailingMargin, relatedBy: .Equal, toItem: self.contentView, attribute: .TrailingMargin, multiplier: 1, constant: -8)
-            )
-        } else {
-            self.contentView.addConstraint(
-                NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self.contentView, attribute: .Trailing, multiplier: 1, constant: -8)
-            )
-        }
-
-        self.contentView.addConstraint(
-            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1, constant: 0)
-        )
-
         self.contentView.addConstraints([
-            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Leading, relatedBy: .GreaterThanOrEqual, toItem: self.textLabel, attribute: .Trailing, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .Leading, relatedBy: .GreaterThanOrEqual, toItem: self.detailTextLabel, attribute: .Trailing, multiplier: 1, constant: 8)
-            ])
+            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .trailingMargin, relatedBy: .equal, toItem: self.contentView, attribute: .trailingMargin, multiplier: 1, constant: -8),
+            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .centerY, relatedBy: .equal, toItem: self.contentView, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: self.textLabel, attribute: .trailing, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: self.rightDetailLabel, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: self.detailTextLabel, attribute: .trailing, multiplier: 1, constant: 8)
+        ])
     }
-
+    
     public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

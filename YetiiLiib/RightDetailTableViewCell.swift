@@ -8,16 +8,16 @@
 
 import UIKit
 
-class RightDetailTableViewCell: UITableViewCell {
-    class func reuseIdentifier() -> String {
+public class RightDetailTableViewCell: UITableViewCell {
+    public class func reuseIdentifier() -> String {
         return "RightDetailTableViewCell"
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Value1, reuseIdentifier: reuseIdentifier)
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
