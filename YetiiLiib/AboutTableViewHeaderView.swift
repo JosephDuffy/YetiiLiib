@@ -16,7 +16,7 @@ public final class AboutTableViewHeaderView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let appName = Bundle.main.appName
+        let appName = Bundle.main.appName ?? ""
         let appVersion = Bundle.main.appVersion
         let appBuild = Bundle.main.appBuild
 
