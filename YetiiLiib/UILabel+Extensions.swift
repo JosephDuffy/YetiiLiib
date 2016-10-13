@@ -9,24 +9,24 @@
 import UIKit
 
 extension UILabel {
-    convenience init(fontStyle: String) {
+    public convenience init(fontStyle: String) {
         self.init(frame: CGRect.zero)
 
         self.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle(rawValue: fontStyle))
     }
 
-    func currentFontStyle() -> String {
-        if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)) {
+    public func currentFontStyle() -> String {
+        if self.font.isEqual(UIFont.preferredFont(forTextStyle: .body)) {
             return UIFontTextStyle.body.rawValue
-        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)) {
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .headline)) {
             return UIFontTextStyle.headline.rawValue
-        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)) {
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .caption1)) {
             return UIFontTextStyle.caption1.rawValue
-        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)) {
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .caption2)) {
             return UIFontTextStyle.caption2.rawValue
-        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)) {
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .footnote)) {
             return UIFontTextStyle.footnote.rawValue
-        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)) {
+        } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .subheadline)) {
             return UIFontTextStyle.subheadline.rawValue
         }
         return UIFontTextStyle.body.rawValue
