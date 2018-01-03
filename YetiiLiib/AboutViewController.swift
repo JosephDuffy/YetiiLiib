@@ -8,18 +8,26 @@
 
 import UIKit
 import QuartzCore
+import SafariServices
 
 final public class AboutViewController: UITableViewController {
+
+    public struct Section {
+        public let title: String?
+
+        public let people: [AboutScreenUser]
+
+        public init(title: String?, people: [AboutScreenUser]) {
+            self.title = title
+            self.people = people
+        }
+    }
+
     typealias TwitterApplication = (title: String, url: URL)
 
     private var headerView: UIView!
 
-    public var primaryPeople: [AboutScreenUser] = [
-        AboutScreenUser(displayName: "Yetii Ltd.", title: "Company News", twitterUsername: "YetiiNet"),
-        AboutScreenUser(displayName: "Joseph Duffy", title: "Developer", twitterUsername: "Joe_Duffy")
-    ]
-
-    public var specialThanksPeople: [AboutScreenUser] = []
+    public let sections: [Section]
 
     lazy var actionSheetTwitterApplications: [TwitterApplication] = {
         var actionSheetTwitterApplications = [TwitterApplication]()
@@ -51,11 +59,10 @@ final public class AboutViewController: UITableViewController {
         return actionSheetTwitterApplications
     }()
 
-    public init(applicationUser: AboutScreenUser, specialThanksPeople: [AboutScreenUser]) {
-        super.init(style: .grouped)
+    public init(sections: [Section]) {
+        self.sections = sections
 
-        self.primaryPeople.insert(applicationUser, at: 0)
-        self.specialThanksPeople = specialThanksPeople
+        super.init(style: .grouped)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -70,18 +77,18 @@ final public class AboutViewController: UITableViewController {
         }
         // Setting the table header view with a height of 0.01 fixes a bug that adds a gap between the
         // tableHeaderView (once added) and the top row. See: http://stackoverflow.com/a/18938763/657676
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 0.01))
-        self.headerView = AboutTableViewHeaderView(frame: CGRect.zero)
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 0.01))
+        headerView = AboutTableViewHeaderView(frame: CGRect.zero)
 
-        self.title = "About"
+        title = "About"
 
         // Uncomment this line to hide the top line of the table view
         //        self.tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
-        self.tableView.alwaysBounceVertical = false
-        self.tableView.register(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
-        self.tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.alwaysBounceVertical = false
+        tableView.register(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
+        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     public override func viewDidLayoutSubviews() {
@@ -102,73 +109,54 @@ final public class AboutViewController: UITableViewController {
     }
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.specialThanksPeople.count > 0 ? 2 : 1
+        return sections.count
     }
 
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return self.primaryPeople.count
-        } else if section == 1 {
-            return self.specialThanksPeople.count
-        } else {
-             return 0
-        }
+        return sections[section].people.count
     }
 
     public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
         }
+
         return UITableViewAutomaticDimension
     }
 
     public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return UIView(frame: CGRect.zero)
+            return UIView(frame: .zero)
         }
+
         return nil
     }
 
     public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Special Thanks"
-        }
-        return nil
+        return sections[section].title
     }
 
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = (indexPath as NSIndexPath).section
-        let row = (indexPath as NSIndexPath).row
+        let person = self.person(for: indexPath)
 
-        if section == 0 || section == 1 {
-            let person: AboutScreenUser
-
-            if section == 0 {
-                person = self.primaryPeople[row]
-            } else {
-                person = self.specialThanksPeople[row]
-            }
-
-            if person.twitterUsername != nil {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TwitterUserTableViewCell.reuseIdentifier(), for: indexPath) as! TwitterUserTableViewCell
-                cell.user = person
-                return cell
-            } else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SubtitleTableViewCell.reuseIdentifier(), for: indexPath)
-                cell.textLabel?.text = person.displayName
-                cell.detailTextLabel?.text = person.title
-                cell.selectionStyle = .none
-                return cell
-            }
+        if person.twitterUsername != nil {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: TwitterUserTableViewCell.reuseIdentifier(), for: indexPath) as! TwitterUserTableViewCell
+            cell.user = person
+            return cell
+        } else {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: SubtitleTableViewCell.reuseIdentifier(), for: indexPath)
+            cell.textLabel?.text = person.displayName
+            cell.detailTextLabel?.text = person.title
+            cell.selectionStyle = .none
+            return cell
         }
-
-        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard let person = person(for: indexPath) else { return }
+        let person = self.person(for: indexPath)
+
         guard let username = person.twitterUsername else { return }
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
@@ -177,11 +165,16 @@ final public class AboutViewController: UITableViewController {
         alertController.popoverPresentationController?.sourceRect = cell.bounds
 
         for application in self.actionSheetTwitterApplications {
-            let action = UIAlertAction(title: application.title, style: .default, handler: { action in
+            let action = UIAlertAction(title: application.title, style: .default, handler: { [weak self] action in
                 var url = application.url
                 url.appendPathComponent(username)
 
-                UIApplication.shared.openURL(url)
+                if #available(iOS 9.0, *), let `self` = self, url.scheme == "http" || url.scheme == "https" {
+                    let viewController = SFSafariViewController(url: url)
+                    self.present(viewController, animated: true, completion: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
             })
 
             alertController.addAction(action)
@@ -193,17 +186,11 @@ final public class AboutViewController: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    private func person(for indexPath: IndexPath) -> AboutScreenUser? {
+    private func person(for indexPath: IndexPath) -> AboutScreenUser {
         let section = indexPath.section
         let row = indexPath.row
 
-        if section == 0 && row < primaryPeople.count {
-            return primaryPeople[row]
-        } else if section == 1 && row < specialThanksPeople.count {
-            return specialThanksPeople[row]
-        } else {
-            return nil
-        }
+        return sections[section].people[row]
     }
     
 }

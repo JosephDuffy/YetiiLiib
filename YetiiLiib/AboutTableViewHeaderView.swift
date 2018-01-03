@@ -20,29 +20,29 @@ public final class AboutTableViewHeaderView: UIView {
         let appVersion = Bundle.main.appVersion
         let appBuild = Bundle.main.appBuild
 
-        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "App Icon 128pt", in: Bundle.main, compatibleWith: nil) {
-            self.imageView.image = image.imageAfterApplyingAppIconMask()
+            imageView.image = image.imageAfterApplyingAppIconMask()
         } else {
             print("Failed to get app icon image")
         }
 
-        self.appNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.appNameLabel.textAlignment = .center
-        self.appNameLabel.text = "\(appName) \(appVersion) (build \(appBuild))"
-        self.appNameLabel.sizeToFit()
+        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        appNameLabel.textAlignment = .center
+        appNameLabel.text = "\(appName) \(appVersion) (build \(appBuild))"
+        appNameLabel.sizeToFit()
 
-        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.textAlignment = .center
-        self.descriptionLabel.text = "\(appName) is lovingly created by Yetii Ltd., and wouldn't be possible without these awesome people."
-        self.updateDescriptionLabelPMLW()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.text = "\(appName) is created by me, Joseph Duffy, and wouldn't be possible without the help and support of the people below."
+        updateDescriptionLabelPMLW()
 
-        self.addSubview(self.imageView)
-        self.addSubview(self.appNameLabel)
-        self.addSubview(self.descriptionLabel)
+        addSubview(imageView)
+        addSubview(appNameLabel)
+        addSubview(descriptionLabel)
 
-        self.addConstraints([
+        addConstraints([
             // App icon constraints
             NSLayoutConstraint(item: self.imageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 8),
             NSLayoutConstraint(item: self.imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
@@ -59,7 +59,7 @@ public final class AboutTableViewHeaderView: UIView {
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 16),
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -16),
             NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.descriptionLabel, attribute: .bottom, multiplier: 1, constant: 8)
-            ])
+        ])
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -90,22 +90,20 @@ public final class AboutTableViewHeaderView: UIView {
         - iPad Air 2
         */
         // -32 for the 16 padding on the left and right
-        let newValue = self.frame.width - 32
+        let newValue = frame.width - 32
 
-        if self.descriptionLabel.preferredMaxLayoutWidth != newValue {
-            self.descriptionLabel.preferredMaxLayoutWidth = newValue
-            self.descriptionLabel.sizeToFit()
+        guard descriptionLabel.preferredMaxLayoutWidth != newValue else { return }
 
-            // Check for iOS 9 devices in landscape
-            // This should also check for iPads (specifically iPad Air 2), which fixes the issue
-            // of the label being truncated ("...") when using the slide in feature
-            if #available(iOS 9.0, *) {
-                if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
-                    self.superview?.setNeedsLayout()
-                    self.superview?.layoutIfNeeded()
-                }
-            }
-        }
+        descriptionLabel.preferredMaxLayoutWidth = newValue
+        descriptionLabel.sizeToFit()
+
+        // Check for iOS 9 devices in landscape
+        // This should also check for iPads (specifically iPad Air 2), which fixes the issue
+        // of the label being truncated ("...") when using the slide in feature
+        guard #available(iOS 9.0, *), UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) else { return }
+
+        superview?.setNeedsLayout()
+        superview?.layoutIfNeeded()
     }
     
 }
