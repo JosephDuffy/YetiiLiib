@@ -83,8 +83,10 @@ final public class AboutViewController: UITableViewController {
         title = "About"
 
         // Uncomment this line to hide the top line of the table view
-        //        self.tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
+        // self.tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         tableView.alwaysBounceVertical = false
+        tableView.estimatedRowHeight = 56
+        tableView.rowHeight = 56
         tableView.register(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
         tableView.delegate = self
@@ -114,22 +116,6 @@ final public class AboutViewController: UITableViewController {
 
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].people.count
-    }
-
-    public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0
-        }
-
-        return UITableViewAutomaticDimension
-    }
-
-    public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return UIView(frame: .zero)
-        }
-
-        return nil
     }
 
     public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -192,5 +178,6 @@ final public class AboutViewController: UITableViewController {
 
         return sections[section].people[row]
     }
-    
+
 }
+
