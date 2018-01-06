@@ -35,7 +35,7 @@ public final class AboutTableViewHeaderView: UIView {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        descriptionLabel.text = "\(appName) is created by me, Joseph Duffy, and wouldn't be possible without the help and support of the people below."
+        descriptionLabel.text = "\(appName) is created by me, Joseph Duffy, and wouldn't be possible without the support of my friends and family.\n\nThe people that have contributed to \(appName) are shown below."
         updateDescriptionLabelPMLW()
 
         addSubview(imageView)
@@ -58,7 +58,7 @@ public final class AboutTableViewHeaderView: UIView {
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .top, relatedBy: .equal, toItem: self.appNameLabel, attribute: .bottom, multiplier: 1, constant: 8),
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 16),
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -16),
-            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.descriptionLabel, attribute: .bottom, multiplier: 1, constant: 8)
+            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.descriptionLabel, attribute: .bottom, multiplier: 1, constant: 16),
         ])
     }
 
@@ -74,21 +74,21 @@ public final class AboutTableViewHeaderView: UIView {
 
     private func updateDescriptionLabelPMLW() {
         /*
-        iOS 7
-        Tested on:
-        - iPad 2 (7.0.6)
-        - iPhone 4 (7.1.1)
+         iOS 7
+         Tested on:
+         - iPad 2 (7.0.6)
+         - iPhone 4 (7.1.1)
 
-        iOS 8.1
-        Tested on:
-        - iPhone 5 (sim)
-        - iPad Retina (sim)
+         iOS 8.1
+         Tested on:
+         - iPhone 5 (sim)
+         - iPad Retina (sim)
 
-        iOS 9
-        Tested on:
-        - iPhone 6
-        - iPad Air 2
-        */
+         iOS 9
+         Tested on:
+         - iPhone 6
+         - iPad Air 2
+         */
         // -32 for the 16 padding on the left and right
         let newValue = frame.width - 32
 
@@ -105,5 +105,6 @@ public final class AboutTableViewHeaderView: UIView {
         superview?.setNeedsLayout()
         superview?.layoutIfNeeded()
     }
-    
+
 }
+
