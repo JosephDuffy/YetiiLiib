@@ -1,36 +1,29 @@
-//
-//  AppInformationTableViewCell.swift
-//  YetiiLiib
-//
-//  Created by Joseph Duffy on 09/12/2015.
-//  Copyright © 2015 Yetii Ltd. All rights reserved.
-//
-
 import UIKit
 
 public final class AppInformationTableViewCell: UITableViewCell {
+
     public class func reuseIdentifier() -> String {
         return "AppInformationTableViewCell"
     }
 
-    @IBOutlet weak var appIconImageView: UIImageView!
-    @IBOutlet weak var appIconActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var appNameLabel: UILabel!
-    @IBOutlet weak var appPriceLabel: UILabel!
+    @IBOutlet private var appIconImageView: UIImageView!
+    @IBOutlet private var appIconActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var appNameLabel: UILabel!
+    @IBOutlet private var appPriceLabel: UILabel!
 
-    open override var textLabel: UILabel? {
+    public override var textLabel: UILabel? {
         get {
             return self.appNameLabel
         }
     }
 
-    open override var detailTextLabel: UILabel? {
+    public override var detailTextLabel: UILabel? {
         get {
             return self.appPriceLabel
         }
     }
 
-    open override var imageView: UIImageView? {
+    public override var imageView: UIImageView? {
         get {
             return self.appIconImageView
         }
@@ -44,8 +37,8 @@ public final class AppInformationTableViewCell: UITableViewCell {
         }
     }
 
-    fileprivate func setup(for appMetaData: AppMetaData) {
-        self.appNameLabel.text = appMetaData.name
+    private func setup(for appMetaData: AppMetaData) {
+        appNameLabel.text = appMetaData.name
         self.appPriceLabel.text = appMetaData.formattedPrice
 
         if let imageView = self.imageView , imageView.image == nil {
@@ -57,13 +50,6 @@ public final class AppInformationTableViewCell: UITableViewCell {
                 self.setNeedsLayout()
             })
         }
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.appNameLabel.preferredMaxLayoutWidth = self.appNameLabel.frame.size.width
-        self.appNameLabel.sizeToFit()
     }
     
 }

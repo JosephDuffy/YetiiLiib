@@ -54,7 +54,7 @@ public final class OtherAppsTableViewController: UITableViewController {
 
         self.title = "More Apps"
 
-        self.tableView.estimatedRowHeight = 43.5
+        self.tableView.estimatedRowHeight = 59.5
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.register(UINib(nibName: "AppInformationTableViewCell", bundle: Bundle.framework), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
 
@@ -183,7 +183,7 @@ public final class OtherAppsTableViewController: UITableViewController {
 
         do {
             let url = try appMetaData.appStoreURL(campaignProviderId: self.campaignProviderId, campaignToken: self.campaignToken)
-            UIApplication.shared.openURL(url as URL)
+            UIApplication.shared.openURL(url)
         } catch let error as URLGenerationError {
             print(error)
         } catch {
