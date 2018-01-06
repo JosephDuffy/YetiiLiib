@@ -23,6 +23,7 @@
 		D92111A51C15D61D003DB330 /* AboutScreenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111A41C15D61D003DB330 /* AboutScreenUser.swift */; };
 		D92111BD1C15FFD8003DB330 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */; };
 		D92111BF1C16013E003DB330 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D92111BE1C16013E003DB330 /* Media.xcassets */; };
+		D94497A12000733700286A9C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94497A02000733700286A9C /* TableViewCell.swift */; };
 		D97DD17A1C185C6800F0D11F /* AppInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */; };
 		D97DD17B1C185C6800F0D11F /* AppInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		D92111A41C15D61D003DB330 /* AboutScreenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScreenUser.swift; sourceTree = "<group>"; };
 		D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		D92111BE1C16013E003DB330 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		D94497A02000733700286A9C /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInformationTableViewCell.swift; sourceTree = "<group>"; };
 		D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppInformationTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */,
+				D94497A02000733700286A9C /* TableViewCell.swift */,
 				D921119B1C15D1F2003DB330 /* SubtitleAndRightDetailTableViewCell.swift */,
 				D921119D1C15D21A003DB330 /* SubtitleTableViewCell.swift */,
 				D920E4D51C17A262005BA928 /* RightDetailTableViewCell.swift */,
@@ -280,6 +283,7 @@
 				D92111A11C15D24E003DB330 /* UILabel+Extensions.swift in Sources */,
 				D921119A1C15D1D1003DB330 /* TwitterUserTableViewCell.swift in Sources */,
 				D92111A31C15D2B4003DB330 /* Bundle+Extensions.swift in Sources */,
+				D94497A12000733700286A9C /* TableViewCell.swift in Sources */,
 				D92111941C15D159003DB330 /* AboutViewController.swift in Sources */,
 				D921119E1C15D21A003DB330 /* SubtitleTableViewCell.swift in Sources */,
 				D97DD17A1C185C6800F0D11F /* AppInformationTableViewCell.swift in Sources */,
