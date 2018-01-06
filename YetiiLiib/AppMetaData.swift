@@ -118,7 +118,7 @@ public struct AppMetaData {
         }
 
         if let campaignToken = campaignToken {
-            if campaignToken.characters.count > 40 {
+            if campaignToken.count > 40 {
                 throw URLGenerationError.campaignTokenTooLong
             }
             try addParamter("ct", value: campaignToken)
