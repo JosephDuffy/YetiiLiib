@@ -1,7 +1,7 @@
 import UIKit
 
-@available(iOS 9.0, *)
-public final class OtherAppsTableViewController: UITableViewController {
+@available(iOS, obsoleted: 9.0)
+public final class OtherAppsTableViewControlleriOS8: UITableViewController {
 
     public var appMetaDatas: [AppMetaData] = []
     public var companyName: String?
@@ -18,7 +18,7 @@ public final class OtherAppsTableViewController: UITableViewController {
       - Yetii Ltd.: 929726747
       - Apple: 284417353
     */
-    public let developerId: Int
+    public var developerId: Int!
 
     /**
      The campaign provider id (pt) to append to the app store URL
@@ -42,10 +42,12 @@ public final class OtherAppsTableViewController: UITableViewController {
         return (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String ?? "us"
     }()
 
-    public init(developerId: Int) {
-        self.developerId = developerId
-
+    public init() {
         super.init(style: .grouped)
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -71,7 +73,12 @@ public final class OtherAppsTableViewController: UITableViewController {
                 }
             }
 
-            let urlString = "https://itunes.apple.com/lookup?id=\(self.developerId)&entity=software&country=\(self.countryCode)"
+            guard let developerId = self.developerId else {
+                print("WARNING: `developerId` needs to be set after `init` and before `viewDidLoad`")
+                return
+            }
+
+            let urlString = "https://itunes.apple.com/lookup?id=\(developerId)&entity=software&country=\(self.countryCode)"
             guard let url = URL(string: urlString) else {
                 print("Failed to create NSURL from string: \(urlString)")
                 errorLoadingData()

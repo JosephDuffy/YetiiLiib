@@ -1,9 +1,8 @@
 import UIKit
 import QuartzCore
-import SafariServices
 
-@available(iOS 9.0, *)
-final public class AboutViewController: UITableViewController {
+@available(iOS, obsoleted: 9.0)
+final public class AboutViewControlleriOS8: UITableViewController {
 
     public struct Section {
         public let title: String?
@@ -18,17 +17,18 @@ final public class AboutViewController: UITableViewController {
 
     typealias TwitterApplication = (title: String, url: URL)
 
-    public let sections: [Section]
+    public var sections: [Section] = []
 
-    public let otherAppsTableViewController: OtherAppsTableViewController?
+    public var otherAppsTableViewController: OtherAppsTableViewControlleriOS8?
 
     private let tableHeaderView = AboutTableViewHeaderView(frame: .zero)
 
-    public init(sections: [Section], otherAppsTableViewController: OtherAppsTableViewController?) {
-        self.sections = sections
-        self.otherAppsTableViewController = otherAppsTableViewController
-
+    public init() {
         super.init(style: .grouped)
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -41,7 +41,7 @@ final public class AboutViewController: UITableViewController {
         if let currentTableHeaderView = tableView.tableHeaderView {
             currentTableHeaderView.removeFromSuperview()
         }
-        
+
         // Setting the table header view with a height of 0.01 fixes a bug that adds a gap between the
         // tableHeaderView (once added) and the top row. See: http://stackoverflow.com/a/18938763/657676
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0.01))
@@ -160,18 +160,11 @@ final public class AboutViewController: UITableViewController {
             alertController.popoverPresentationController?.sourceRect = cell.bounds
 
             for application in actionSheetTwitterApplications() {
-                let action = UIAlertAction(title: application.title, style: .default, handler: { [weak self] action in
-                    guard let `self` = self else { return }
-
+                let action = UIAlertAction(title: application.title, style: .default, handler: { action in
                     var url = application.url
                     url.appendPathComponent(username)
 
-                    if url.scheme == "http" || url.scheme == "https" {
-                        let viewController = SFSafariViewController(url: url)
-                        self.present(viewController, animated: true, completion: nil)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
+                    UIApplication.shared.openURL(url)
                 })
 
                 alertController.addAction(action)
