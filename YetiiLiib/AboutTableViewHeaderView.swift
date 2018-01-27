@@ -1,11 +1,3 @@
-//
-//  AboutTableViewHeaderView.swift
-//  YetiiLiib
-//
-//  Created by Joseph Duffy on 07/12/2015.
-//  Copyright © 2015 Yetii Ltd. All rights reserved.
-//
-
 import UIKit
 
 public final class AboutTableViewHeaderView: UIView {
@@ -27,7 +19,7 @@ public final class AboutTableViewHeaderView: UIView {
             print("Failed to get app icon image")
         }
         if #available(iOS 11.0, *) {
-            imageView.accessibilityIgnoresInvertColors = false
+            imageView.accessibilityIgnoresInvertColors = true
         }
 
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false

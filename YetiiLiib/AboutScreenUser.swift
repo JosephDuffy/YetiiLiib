@@ -1,11 +1,3 @@
-//
-//  AboutScreenUser.swift
-//  YetiiLiib
-//
-//  Created by Joseph Duffy on 07/12/2015.
-//  Copyright © 2015 Yetii Ltd. All rights reserved.
-//
-
 import Foundation
 
 public struct AboutScreenUser {
