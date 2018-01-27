@@ -26,6 +26,9 @@ public final class AboutTableViewHeaderView: UIView {
         } else {
             print("Failed to get app icon image")
         }
+        if #available(iOS 11.0, *) {
+            imageView.accessibilityIgnoresInvertColors = false
+        }
 
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         appNameLabel.textAlignment = .center

@@ -37,6 +37,14 @@ public final class AppInformationTableViewCell: UITableViewCell {
         }
     }
 
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+
+        if #available(iOS 11.0, *) {
+            appIconImageView.accessibilityIgnoresInvertColors = true
+        }
+    }
+
     private func setup(for appMetaData: AppMetaData) {
         appNameLabel.text = appMetaData.name
         self.appPriceLabel.text = appMetaData.formattedPrice
