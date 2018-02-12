@@ -1,7 +1,7 @@
 import UIKit
 import QuartzCore
 
-@available(iOS, obsoleted: 9.0)
+@available(iOS, obsoleted: 9.0, renamed: "AboutTableViewHeaderView")
 final public class AboutViewControlleriOS8: UITableViewController {
 
     public struct Section {
@@ -185,5 +185,5 @@ final public class AboutViewControlleriOS8: UITableViewController {
 
         return sections[section].people[row]
     }
-    
+
 }

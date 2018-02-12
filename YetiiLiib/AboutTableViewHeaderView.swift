@@ -5,7 +5,7 @@ public final class AboutTableViewHeaderView: UIView {
     public let appNameLabel = UILabel(fontStyle: UIFontTextStyle.headline.rawValue)
     public let descriptionLabel = UILabel()
 
-    public override init(frame: CGRect) {
+    public required init(frame: CGRect, showBuild: Bool = false) {
         super.init(frame: frame)
 
         let appName = Bundle.main.appName ?? ""
@@ -23,8 +23,15 @@ public final class AboutTableViewHeaderView: UIView {
         }
 
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 9.0, *) {
+            appNameLabel.font = .preferredFont(forTextStyle: .title1)
+        }
         appNameLabel.textAlignment = .center
-        appNameLabel.text = "\(appName) \(appVersion) (build \(appBuild))"
+        var nameLabelText = "\(appName) \(appVersion)"
+        if showBuild {
+            nameLabelText += " (build \(appBuild))"
+        }
+        appNameLabel.text = nameLabelText
         appNameLabel.sizeToFit()
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +61,7 @@ public final class AboutTableViewHeaderView: UIView {
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 16),
             NSLayoutConstraint(item: self.descriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -16),
             NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.descriptionLabel, attribute: .bottom, multiplier: 1, constant: 16),
-        ])
+            ])
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -102,4 +109,3 @@ public final class AboutTableViewHeaderView: UIView {
     }
 
 }
-
