@@ -1,0 +1,26 @@
+# Xcode
+
+## Build generated
+build/
+
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Carthage
+Carthage/
+
+# macOS
+.DS_Store
+
+# Node
+node_modules
+
+# Documentation
+docs/
