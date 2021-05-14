@@ -44,7 +44,7 @@ final class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell, UIAct
 
         for application in self.actionSheetTwitterApplications {
             let action = UIAlertAction(title: application.title, style: .default, handler: { (action) -> Void in
-                UIApplication.shared.openURL(application.url)
+                UIApplication.shared.open(application.url)
             })
 
             controller.addAction(action)

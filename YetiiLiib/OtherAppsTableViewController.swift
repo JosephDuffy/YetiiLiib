@@ -141,7 +141,7 @@ public final class OtherAppsTableViewController: UITableViewController {
                 label.numberOfLines = 0
                 label.translatesAutoresizingMaskIntoConstraints = false
 
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .medium)
                 if !self.hasLoadedApps {
                     activityIndicator.startAnimating()
                 }
@@ -184,7 +184,7 @@ public final class OtherAppsTableViewController: UITableViewController {
 
         do {
             let url = try appMetaData.appStoreURL(campaignProviderId: self.campaignProviderId, campaignToken: self.campaignToken)
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url)
         } catch let error as URLGenerationError {
             print(error)
         } catch {

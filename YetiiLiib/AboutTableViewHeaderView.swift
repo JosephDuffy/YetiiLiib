@@ -102,7 +102,7 @@ public final class AboutTableViewHeaderView: UIView {
         // Check for iOS 9 devices in landscape
         // This should also check for iPads (specifically iPad Air 2), which fixes the issue
         // of the label being truncated ("...") when using the slide in feature
-        guard #available(iOS 9.0, *), UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) else { return }
+        guard #available(iOS 9.0, *), window?.windowScene?.interfaceOrientation.isLandscape == true else { return }
 
         superview?.setNeedsLayout()
         superview?.layoutIfNeeded()

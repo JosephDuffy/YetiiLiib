@@ -170,7 +170,7 @@ final public class AboutViewController: UITableViewController {
                         let viewController = SFSafariViewController(url: url)
                         self.present(viewController, animated: true, completion: nil)
                     } else {
-                        UIApplication.shared.openURL(url)
+                        UIApplication.shared.open(url)
                     }
                 })
 
