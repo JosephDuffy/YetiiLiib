@@ -56,7 +56,7 @@ final class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell, UIAct
         return controller
     }()
 
-    open var user: AboutScreenUser! {
+    public var user: AboutScreenUser! {
         didSet {
             assert(user.twitterUsername != nil)
             
@@ -66,7 +66,7 @@ final class TwitterUserTableViewCell: SubtitleAndRightDetailTableViewCell, UIAct
         }
     }
 
-    open var username: String {
+    public var username: String {
         return self.user.twitterUsername!
     }
     
