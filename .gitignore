@@ -37,3 +37,6 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+
+# macOS
+.DS_Store
