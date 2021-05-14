@@ -6,7 +6,7 @@ public class TableViewCell: UITableViewCell {
         return "TableViewCell"
     }
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
     }
 

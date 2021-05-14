@@ -5,7 +5,7 @@ public class SubtitleTableViewCell: UITableViewCell {
         return "SubtitleTableViewCell"
     }
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 

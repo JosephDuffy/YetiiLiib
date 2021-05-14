@@ -10,7 +10,7 @@ public class SubtitleAndRightDetailTableViewCell: UITableViewCell {
 
     private var didUpdateConstraints = false
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         rightDetailLabel = UILabel()
 
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

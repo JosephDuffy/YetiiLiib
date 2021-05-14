@@ -58,7 +58,7 @@ public final class OtherAppsTableViewController: UITableViewController {
         title = "More Apps"
 
         tableView.estimatedRowHeight = 59.5
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "AppInformationTableViewCell", bundle: Bundle.framework), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
 
         DispatchQueue.global().async {
@@ -141,7 +141,7 @@ public final class OtherAppsTableViewController: UITableViewController {
                 label.numberOfLines = 0
                 label.translatesAutoresizingMaskIntoConstraints = false
 
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .medium)
+                let activityIndicator = UIActivityIndicatorView(style: .medium)
                 if !self.hasLoadedApps {
                     activityIndicator.startAnimating()
                 }

@@ -231,11 +231,11 @@
 				TargetAttributes = {
 					D92111761C15D10A003DB330 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1250;
 					};
 					D92111801C15D10A003DB330 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -456,7 +456,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -481,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -493,7 +493,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -505,7 +505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

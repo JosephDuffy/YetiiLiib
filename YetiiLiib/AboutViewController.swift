@@ -64,7 +64,7 @@ final public class AboutViewController: UITableViewController {
         super.viewDidLayoutSubviews()
 
         var frame = tableView.frame
-        frame.size.height = tableHeaderView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        frame.size.height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         if tableView.tableHeaderView == nil || !frame.equalTo(tableHeaderView.frame) {
             tableHeaderView.frame = frame
 

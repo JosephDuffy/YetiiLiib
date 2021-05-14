@@ -2,7 +2,7 @@ import UIKit
 
 public final class AboutTableViewHeaderView: UIView {
     public let imageView = UIImageView()
-    public let appNameLabel = UILabel(fontStyle: UIFontTextStyle.headline.rawValue)
+    public let appNameLabel = UILabel(fontStyle: UIFont.TextStyle.headline.rawValue)
     public let descriptionLabel = UILabel()
 
     public required init(frame: CGRect, showBuild: Bool = false) {

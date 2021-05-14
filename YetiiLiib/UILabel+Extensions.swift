@@ -4,23 +4,23 @@ extension UILabel {
     public convenience init(fontStyle: String) {
         self.init(frame: CGRect.zero)
 
-        self.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle(rawValue: fontStyle))
+        self.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle(rawValue: fontStyle))
     }
 
     public func currentFontStyle() -> String {
         if self.font.isEqual(UIFont.preferredFont(forTextStyle: .body)) {
-            return UIFontTextStyle.body.rawValue
+            return UIFont.TextStyle.body.rawValue
         } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .headline)) {
-            return UIFontTextStyle.headline.rawValue
+            return UIFont.TextStyle.headline.rawValue
         } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .caption1)) {
-            return UIFontTextStyle.caption1.rawValue
+            return UIFont.TextStyle.caption1.rawValue
         } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .caption2)) {
-            return UIFontTextStyle.caption2.rawValue
+            return UIFont.TextStyle.caption2.rawValue
         } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .footnote)) {
-            return UIFontTextStyle.footnote.rawValue
+            return UIFont.TextStyle.footnote.rawValue
         } else if self.font.isEqual(UIFont.preferredFont(forTextStyle: .subheadline)) {
-            return UIFontTextStyle.subheadline.rawValue
+            return UIFont.TextStyle.subheadline.rawValue
         }
-        return UIFontTextStyle.body.rawValue
+        return UIFont.TextStyle.body.rawValue
     }
 }
