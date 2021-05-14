@@ -241,11 +241,11 @@
 			};
 			buildConfigurationList = D92111711C15D10A003DB330 /* Build configuration list for PBXProject "YetiiLiib" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = D921116D1C15D10A003DB330;
 			productRefGroup = D92111781C15D10A003DB330 /* Products */;
