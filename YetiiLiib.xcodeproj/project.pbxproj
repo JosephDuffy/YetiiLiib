@@ -84,20 +84,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D920E4CE1C179850005BA928 /* Other Apps Screen */ = {
-			isa = PBXGroup;
-			children = (
-				D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */,
-				D9BE331D201D16C2006468EC /* OtherAppsTableViewControlleriOS8.swift */,
-				D920E4D31C179D6B005BA928 /* AppMetaData.swift */,
-			);
-			name = "Other Apps Screen";
-			sourceTree = "<group>";
-		};
 		D921116D1C15D10A003DB330 = {
 			isa = PBXGroup;
 			children = (
-				D92111791C15D10A003DB330 /* YetiiLiib */,
+				D92111791C15D10A003DB330 /* Sources */,
 				D92111851C15D10A003DB330 /* YetiiLiibTests */,
 				D92111781C15D10A003DB330 /* Products */,
 			);
@@ -112,18 +102,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D92111791C15D10A003DB330 /* YetiiLiib */ = {
+		D92111791C15D10A003DB330 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D921119F1C15D245003DB330 /* Extensions */,
-				D92111981C15D1B8003DB330 /* Custom Cells */,
-				D92111911C15D11F003DB330 /* About Screen */,
-				D920E4CE1C179850005BA928 /* Other Apps Screen */,
+				D9BAB83726597E830074BCF3 /* YetiiLiib */,
 				D921117A1C15D10A003DB330 /* YetiiLiib.h */,
 				D921117C1C15D10A003DB330 /* Info.plist */,
-				D92111BE1C16013E003DB330 /* Media.xcassets */,
 			);
-			path = YetiiLiib;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		D92111851C15D10A003DB330 /* YetiiLiibTests */ = {
@@ -135,17 +121,29 @@
 			path = YetiiLiibTests;
 			sourceTree = "<group>";
 		};
-		D92111911C15D11F003DB330 /* About Screen */ = {
+		D9BAB83726597E830074BCF3 /* YetiiLiib */ = {
 			isa = PBXGroup;
 			children = (
-				D92111921C15D159003DB330 /* AboutViewController.swift */,
-				D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */,
-				D92111A41C15D61D003DB330 /* AboutScreenUser.swift */,
+				D9BAB83A26597EDE0074BCF3 /* About Screen */,
+				D9BAB83926597ED30074BCF3 /* Custom Cells */,
+				D9BAB83826597EC20074BCF3 /* Extensions */,
+				D9BAB83B26597EF10074BCF3 /* Other Apps Screen */,
+				D92111BE1C16013E003DB330 /* Media.xcassets */,
 			);
-			name = "About Screen";
+			path = YetiiLiib;
 			sourceTree = "<group>";
 		};
-		D92111981C15D1B8003DB330 /* Custom Cells */ = {
+		D9BAB83826597EC20074BCF3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */,
+				D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */,
+				D92111A21C15D2B4003DB330 /* Bundle+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D9BAB83926597ED30074BCF3 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
 				D92111991C15D1D1003DB330 /* TwitterUserTableViewCell.swift */,
@@ -156,17 +154,27 @@
 				D97DD1781C185C6800F0D11F /* AppInformationTableViewCell.swift */,
 				D97DD1791C185C6800F0D11F /* AppInformationTableViewCell.xib */,
 			);
-			name = "Custom Cells";
+			path = "Custom Cells";
 			sourceTree = "<group>";
 		};
-		D921119F1C15D245003DB330 /* Extensions */ = {
+		D9BAB83A26597EDE0074BCF3 /* About Screen */ = {
 			isa = PBXGroup;
 			children = (
-				D92111A01C15D24E003DB330 /* UILabel+Extensions.swift */,
-				D92111BC1C15FFD8003DB330 /* UIImage+Extensions.swift */,
-				D92111A21C15D2B4003DB330 /* Bundle+Extensions.swift */,
+				D92111921C15D159003DB330 /* AboutViewController.swift */,
+				D92111961C15D17B003DB330 /* AboutTableViewHeaderView.swift */,
+				D92111A41C15D61D003DB330 /* AboutScreenUser.swift */,
 			);
-			name = Extensions;
+			path = "About Screen";
+			sourceTree = "<group>";
+		};
+		D9BAB83B26597EF10074BCF3 /* Other Apps Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D920E4CF1C17987E005BA928 /* OtherAppsTableViewController.swift */,
+				D9BE331D201D16C2006468EC /* OtherAppsTableViewControlleriOS8.swift */,
+				D920E4D31C179D6B005BA928 /* AppMetaData.swift */,
+			);
+			path = "Other Apps Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,10 +456,10 @@
 					"FRAMEWORK=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = YetiiLiib/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -D FRAMEWORK";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D XCODE_FRAMEWORK";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -474,10 +482,10 @@
 					"FRAMEWORK=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = YetiiLiib/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -D FRAMEWORK";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D XCODE_FRAMEWORK";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yetii.YetiiLiib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -1,10 +1,16 @@
 import Foundation
+import UIKit
 
 private class InternalClass {}
 
 extension Bundle {
+    #if XCODE_FRAMEWORK
     @nonobjc
     internal static let framework = Bundle(for: InternalClass.self)
+    #else
+    @nonobjc
+    internal static let framework = Bundle.module
+    #endif
 
     public var appName: String? {
         if let appName = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
