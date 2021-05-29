@@ -14,7 +14,7 @@ let package = Package(
             name: "YetiiLiib",
             resources: [
                 .process("Media.xcassets"),
-                .process("AppInformationTableViewCell.xib"),
+                .process("Custom Cells/AppInformationTableViewCell.xib"),
             ]
         ),
     ]
