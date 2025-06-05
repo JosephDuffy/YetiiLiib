@@ -2,9 +2,7 @@ import UIKit
 import QuartzCore
 import SafariServices
 
-@available(iOS 9.0, *)
 final public class AboutViewController: UITableViewController {
-
     public struct Section {
         public let title: String?
 
@@ -15,8 +13,6 @@ final public class AboutViewController: UITableViewController {
             self.people = people
         }
     }
-
-    typealias TwitterApplication = (title: String, url: URL)
 
     public let sections: [Section]
 
@@ -53,7 +49,7 @@ final public class AboutViewController: UITableViewController {
         tableView.alwaysBounceVertical = false
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = 56
-        tableView.register(TwitterUserTableViewCell.self, forCellReuseIdentifier: TwitterUserTableViewCell.reuseIdentifier())
+        tableView.register(UserLinkTableViewCell.self, forCellReuseIdentifier: UserLinkTableViewCell.reuseIdentifier())
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier())
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.reuseIdentifier())
         tableView.delegate = self
@@ -73,36 +69,6 @@ final public class AboutViewController: UITableViewController {
 
             tableView.tableHeaderView = tableHeaderView
         }
-    }
-
-    func actionSheetTwitterApplications() -> [TwitterApplication] {
-        var actionSheetTwitterApplications = [TwitterApplication]()
-
-        let sharedApplication = UIApplication.shared
-        if sharedApplication.canOpenURL(URL(string: "tweetbot://")!), let url = URL(string: "tweetbot:///user_profile/") {
-            // Tweetbot is installed
-            actionSheetTwitterApplications.append(TwitterApplication("Tweetbot", url))
-        }
-
-        if sharedApplication.canOpenURL(URL(string: "twitterrific://")!), let url = URL(string: "twitterrific:///profile?screen_name=") {
-            // Twitterrific is installed
-            actionSheetTwitterApplications.append(TwitterApplication("Twitterrific", url))
-        }
-
-        if sharedApplication.canOpenURL(URL(string: "twitter://")!), let url = URL(string: "twitter://user?screen_name=") {
-            // Twitter is installed
-            actionSheetTwitterApplications.append(TwitterApplication("Twitter", url))
-        }
-
-        if sharedApplication.canOpenURL(URL(string: "googlechromes://")!), let url = URL(string: "googlechromes://www.twitter.com/") {
-            // Google Chrome is installed
-            actionSheetTwitterApplications.append(TwitterApplication("Google Chrome", url))
-        }
-
-        let safariURL = URL(string: "https://www.twitter.com/")!
-        actionSheetTwitterApplications.append(TwitterApplication("Safari", safariURL))
-
-        return actionSheetTwitterApplications
     }
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
@@ -127,9 +93,9 @@ final public class AboutViewController: UITableViewController {
         if sections.indices.contains(indexPath.section) {
             let person = self.person(for: indexPath)
 
-            if person.twitterUsername != nil {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TwitterUserTableViewCell.reuseIdentifier(), for: indexPath) as! TwitterUserTableViewCell
-                cell.user = person
+            if person.link != nil {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: UserLinkTableViewCell.reuseIdentifier(), for: indexPath) as! UserLinkTableViewCell
+                cell.displayUser(person)
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SubtitleTableViewCell.reuseIdentifier(), for: indexPath)
@@ -152,35 +118,14 @@ final public class AboutViewController: UITableViewController {
         if sections.indices.contains(indexPath.section) {
             let person = self.person(for: indexPath)
 
-            guard let username = person.twitterUsername else { return }
-            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+            guard let link = person.link else { return }
 
-            let alertController = UIAlertController(title: username, message: "Choose how to view @\(username)'s profile", preferredStyle: .actionSheet)
-            alertController.popoverPresentationController?.sourceView = cell
-            alertController.popoverPresentationController?.sourceRect = cell.bounds
-
-            for application in actionSheetTwitterApplications() {
-                let action = UIAlertAction(title: application.title, style: .default, handler: { [weak self] action in
-                    guard let `self` = self else { return }
-
-                    var url = application.url
-                    url.appendPathComponent(username)
-
-                    if url.scheme == "http" || url.scheme == "https" {
-                        let viewController = SFSafariViewController(url: url)
-                        self.present(viewController, animated: true, completion: nil)
-                    } else {
-                        UIApplication.shared.open(url)
-                    }
-                })
-
-                alertController.addAction(action)
+            if link.url.scheme == "http" || link.url.scheme == "https", !link.alwaysOpenExternally {
+                let viewController = SFSafariViewController(url: link.url)
+                present(viewController, animated: true, completion: nil)
+            } else {
+                UIApplication.shared.open(link.url)
             }
-
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-
-            self.present(alertController, animated: true, completion: nil)
         } else if let otherAppsTableViewController = otherAppsTableViewController {
             navigationController?.pushViewController(otherAppsTableViewController, animated: true)
         }
@@ -192,5 +137,4 @@ final public class AboutViewController: UITableViewController {
 
         return sections[section].people[row]
     }
-    
 }
