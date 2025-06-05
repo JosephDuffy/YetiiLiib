@@ -1,10 +1,10 @@
-// swift-tools-version:5.4
+// swift-tools-version:6.1
 import PackageDescription
 
 let package = Package(
     name: "YetiiLiib",
     platforms: [
-        .iOS(.v13),
+        .iOS(.v15),
     ],
     products: [
         .library(name: "YetiiLiib", targets: ["YetiiLiib"]),

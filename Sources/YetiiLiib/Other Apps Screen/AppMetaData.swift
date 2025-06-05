@@ -33,39 +33,37 @@ public struct AppMetaData {
         self.artworkURL512 = artworkURL512
     }
 
-    public func imageForSize(_ size: CGSize, applyIconRounding: Bool = true, scale: CGFloat = UIScreen.main.scale, callback: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
-            let minWidth = size.width * scale
-            let minHeight = size.height * scale
-            let minSize = max(minWidth, minHeight)
+    public nonisolated func imageForSize(
+        _ size: CGSize,
+        applyIconRounding: Bool = true,
+        scale: CGFloat
+    ) -> UIImage? {
+        let minWidth = size.width * scale
+        let minHeight = size.height * scale
+        let minSize = max(minWidth, minHeight)
 
-            let url: URL = {
-                if minSize <= 60 {
-                    return self.artworkURL60
-                } else if minSize <= 100 {
-                    return self.artworkURL100
-                } else {
-                    return self.artworkURL512
-                }
-            }()
-
-            if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                let imageToReturn: UIImage?
-
-                if applyIconRounding {
-                    imageToReturn = image.imageAfterApplyingAppIconMask()
-                } else {
-                    imageToReturn = image
-                }
-
-                DispatchQueue.main.async {
-                    callback(imageToReturn)
-                }
+        let url: URL = {
+            if minSize <= 60 {
+                return self.artworkURL60
+            } else if minSize <= 100 {
+                return self.artworkURL100
             } else {
-                DispatchQueue.main.async {
-                    callback(nil)
-                }
+                return self.artworkURL512
             }
+        }()
+
+        if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+            let imageToReturn: UIImage?
+
+            if applyIconRounding {
+                imageToReturn = image.imageAfterApplyingAppIconMask()
+            } else {
+                imageToReturn = image
+            }
+
+            return imageToReturn
+        } else {
+            return nil
         }
     }
 

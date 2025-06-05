@@ -61,59 +61,8 @@ public final class OtherAppsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "AppInformationTableViewCell", bundle: Bundle.framework), forCellReuseIdentifier: AppInformationTableViewCell.reuseIdentifier())
 
-        DispatchQueue.global().async {
-            func errorLoadingData() {
-                self.hasLoadedApps = true
-                self.errorLoadingApps = true
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-
-            let urlString = "https://itunes.apple.com/lookup?id=\(self.developerId)&entity=software&country=\(self.countryCode)"
-            guard let url = URL(string: urlString) else {
-                print("Failed to create NSURL from string: \(urlString)")
-                errorLoadingData()
-                return
-            }
-
-            guard let data = try? Data(contentsOf: url) else {
-                print("Failed to load NSData from url: \(url)")
-                errorLoadingData()
-                return
-            }
-
-            do {
-                if let JSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] {
-                    if let results = JSON["results"] as? [[String : AnyObject]] {
-                        if self.companyName == nil, let firstResult = results.first {
-                            self.companyName = firstResult["artistName"] as? String
-                        }
-
-                        for appInformation in results {
-                            guard let appMetaData = AppMetaData(rawInformation: appInformation) else { continue }
-
-                            // Don't include the current app
-                            guard appMetaData.bundleId != Bundle.main.bundleIdentifier else { continue }
-
-                            self.appMetaDatas.append(appMetaData)
-                        }
-                    }
-                } else {
-                    print("Invalid JSON")
-                }
-
-                self.hasLoadedApps = true
-                self.errorLoadingApps = false
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            } catch {
-                print("Error decoding NSData to JSON: \(error)")
-                errorLoadingData()
-            }
+        Task {
+            await loadApps()
         }
     }
 
@@ -194,4 +143,62 @@ public final class OtherAppsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    private nonisolated func loadApps() async {
+        @MainActor
+        func errorLoadingData() {
+            self.hasLoadedApps = true
+            self.errorLoadingApps = true
+
+            self.tableView.reloadData()
+        }
+
+        let urlString = "https://itunes.apple.com/lookup?id=\(developerId)&entity=software&country=\(await countryCode)"
+        guard let url = URL(string: urlString) else {
+            print("Failed to create NSURL from string: \(urlString)")
+            await errorLoadingData()
+            return
+        }
+
+        guard let data = try? Data(contentsOf: url) else {
+            print("Failed to load NSData from url: \(url)")
+            await errorLoadingData()
+            return
+        }
+
+        do {
+            var appMetaDatas: [AppMetaData] = []
+            var companyName: String?
+
+            if let JSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] {
+                if let results = JSON["results"] as? [[String : AnyObject]] {
+                    if companyName == nil, let firstResult = results.first {
+                        companyName = firstResult["artistName"] as? String
+                    }
+
+                    for appInformation in results {
+                        guard let appMetaData = AppMetaData(rawInformation: appInformation) else { continue }
+
+                        // Don't include the current app
+                        guard appMetaData.bundleId != Bundle.main.bundleIdentifier else { continue }
+
+                        appMetaDatas.append(appMetaData)
+                    }
+                }
+            } else {
+                print("Invalid JSON")
+            }
+
+            Task { @MainActor in
+                self.hasLoadedApps = true
+                self.errorLoadingApps = false
+                self.companyName = companyName
+                self.appMetaDatas = appMetaDatas
+
+                self.tableView.reloadData()
+            }
+        } catch {
+            print("Error decoding NSData to JSON: \(error)")
+            await errorLoadingData()
+        }
+    }
 }
