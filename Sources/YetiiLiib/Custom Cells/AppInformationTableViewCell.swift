@@ -13,6 +13,7 @@ public final class AppInformationTableViewCell: UITableViewCell {
     }
     @IBOutlet private var appIconActivityIndicator: UIActivityIndicatorView!
     @IBOutlet private var appNameLabel: UILabel!
+    @IBOutlet private var appSubtitleLabel: UILabel!
     @IBOutlet private var appPriceLabel: UILabel!
 
     public override var textLabel: UILabel? {
@@ -44,6 +45,7 @@ public final class AppInformationTableViewCell: UITableViewCell {
     private func setup(for appMetaData: AppMetaData) {
         appNameLabel.text = appMetaData.name
         self.appPriceLabel.text = appMetaData.formattedPrice
+        appSubtitleLabel.isHidden = true
 
         if let imageView = self.imageView , imageView.image == nil {
             self.appIconActivityIndicator.startAnimating()

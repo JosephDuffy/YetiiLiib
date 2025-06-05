@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,14 +24,25 @@
                             <constraint firstAttribute="height" constant="35.5" id="cJZ-OL-rDI"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Application Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="4nA-mM-hea">
-                        <rect key="frame" x="67.5" y="11" width="171.5" height="41"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TU3-H8-H9H">
+                        <rect key="frame" x="67.5" y="13" width="172" height="37.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Application Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="4nA-mM-hea">
+                                <rect key="frame" x="0.0" y="0.0" width="172" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Application Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="sKx-sp-L9C" userLabel="App Subtitle Label">
+                                <rect key="frame" x="0.0" y="20.5" width="172" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="£price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8dP-fD-pkG">
-                        <rect key="frame" x="247" y="21.5" width="49" height="20.5"/>
+                        <rect key="frame" x="247.5" y="21.5" width="48.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="secondaryLabelColor"/>
                         <nil key="highlightedColor"/>
@@ -43,20 +54,17 @@
                 <constraints>
                     <constraint firstItem="FEy-W6-1ah" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" priority="750" id="9eU-iI-cYt"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="FEy-W6-1ah" secondAttribute="bottom" id="9xN-mK-ZMv"/>
-                    <constraint firstItem="4nA-mM-hea" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" priority="750" id="MVv-ZR-sxr"/>
-                    <constraint firstItem="4nA-mM-hea" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="OXa-ME-CW3"/>
-                    <constraint firstItem="4nA-mM-hea" firstAttribute="leading" secondItem="FEy-W6-1ah" secondAttribute="trailing" constant="8" symbolic="YES" id="XFF-cx-buC"/>
+                    <constraint firstItem="TU3-H8-H9H" firstAttribute="leading" secondItem="FEy-W6-1ah" secondAttribute="trailing" constant="8" symbolic="YES" id="DpB-l4-PG9"/>
+                    <constraint firstItem="TU3-H8-H9H" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TI4-Cg-iUx"/>
                     <constraint firstItem="8dP-fD-pkG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZpH-Hf-EaI"/>
-                    <constraint firstItem="8dP-fD-pkG" firstAttribute="leading" secondItem="4nA-mM-hea" secondAttribute="trailing" constant="8" symbolic="YES" id="din-F8-BfJ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="FEy-W6-1ah" secondAttribute="bottom" priority="750" id="fck-8k-Uie"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4nA-mM-hea" secondAttribute="bottom" id="g98-HF-PGh"/>
+                    <constraint firstItem="8dP-fD-pkG" firstAttribute="leading" secondItem="TU3-H8-H9H" secondAttribute="trailing" constant="8" symbolic="YES" id="gco-Wx-yUx"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8dP-fD-pkG" secondAttribute="trailing" constant="8" id="jbf-PC-I4N"/>
                     <constraint firstItem="FEy-W6-1ah" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lqc-gb-bwl"/>
                     <constraint firstItem="w6H-oJ-QzN" firstAttribute="centerY" secondItem="FEy-W6-1ah" secondAttribute="centerY" id="mTW-nF-W1I"/>
                     <constraint firstItem="FEy-W6-1ah" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="pAp-k7-1IF"/>
                     <constraint firstItem="w6H-oJ-QzN" firstAttribute="centerX" secondItem="FEy-W6-1ah" secondAttribute="centerX" id="rFy-q3-vbp"/>
                     <constraint firstItem="FEy-W6-1ah" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="xs2-EQ-OyC"/>
-                    <constraint firstItem="4nA-mM-hea" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" priority="750" id="y7x-eK-aSt"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -64,13 +72,14 @@
                 <outlet property="appIconImageView" destination="FEy-W6-1ah" id="InM-e1-Czw"/>
                 <outlet property="appNameLabel" destination="4nA-mM-hea" id="7Ij-mJ-GVE"/>
                 <outlet property="appPriceLabel" destination="8dP-fD-pkG" id="VGS-m4-Mbm"/>
+                <outlet property="appSubtitleLabel" destination="sKx-sp-L9C" id="fxA-g9-YdP"/>
             </connections>
             <point key="canvasLocation" x="25" y="61.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
